@@ -21,5 +21,23 @@ namespace RegTools
         {
 
         }
+        
+    }
+    public interface RegDll
+    {
+        private string toolName;
+        private string toolAuthor;
+        private string toolVer;
+        
+        //private delegate string  GetImgCode(byte[] img);
+        //private GetImgCode getImgCode;
+        //private delegate void DealLogs(string);
+       // private DealLogs dealLogs;
+        
+        private string proxyIp=string.Empty;
+        private string user=string.Empty;
+        private string pass=string.Empty;
+        
+        public void Reg();
     }
 }
