@@ -1,6 +1,6 @@
 *.txt
 *.exe
 *.pdb
-/Release/
-/obj/
+RegTools/bin/Release/
+RegTools/obj/
 /Logs/
