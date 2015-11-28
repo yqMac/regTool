@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using HttpCodeLib;
 using System.IO;
 
@@ -17,12 +14,16 @@ namespace RegTools
         String Cookies =string.Empty ;
         String Proxy = string.Empty;
 
+        public delegate string GetImgCode(byte[] bytes);
+        public GetImgCode getImgCode;
         #endregion 变量
 
-
+        string winx1_1;
+        
         #region 构造
         public Email163()
         {
+            winx1_1 = (((long)new Random().Next(100) * 10e4) + 10e6).ToString() + ((long.Parse(new XJHTTP().GetTimeByJs()) / 1000).ToString());
             helper = new HttpHelpers();
             items = new HttpItems();
             
@@ -38,7 +39,7 @@ namespace RegTools
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public bool CheckUserName(string username)
+        private bool CheckUserName(string username)
         {
             try
             {
@@ -63,7 +64,10 @@ namespace RegTools
 
             return false;
         }
-
+        public void setProxy(string proxyip)
+        {
+            this.Proxy = proxyip;
+        }
         public bool RegUserPass(string user,string pass,ref string status )
         {
             try
@@ -71,8 +75,13 @@ namespace RegTools
                 string codeID= string.Empty ;
                 string postData = string.Empty;
                 string Vcode = string.Empty;
-                byte[] codebytes = null;
-                
+                 byte[] codebytes = null;
+                string[] pros = { "db","xyq","xy2","ty","dh2","bw","xy3","xqn",
+                                 "x3","zmq","dtws2","lj","wh","jl","zh","ff",
+                                    "tuji","wxdj","sc2","y3","my","dhxy","ldxy"};
+
+                string pro = pros[new Random ().Next (pros.Length )];
+                Cookies = "";
                 status = string.Empty ;
 
                 if(!CheckUserName (user))
@@ -83,7 +92,7 @@ namespace RegTools
 
 
                 //获取初始　JSESSIONID,SID两个唯一标识，返回的Cookie里面
-                string url = String.Format("http://reg.163.com/reg/innerDomainReg.do?product=db&url=http%3A%2F%2Fdb.163.com&loginurl=http%3A%2F%2Fdb.163.com");
+                string url = String.Format("http://reg.163.com/reg/innerDomainReg.do?product="+pro+"&url=http%3A%2F%2F"+pro+".163.com&loginurl=http%3A%2F%2F"+pro+".163.com");
                 items = new HttpItems();
                 items.URL = url;
                 //items.Container = cc;
@@ -98,10 +107,10 @@ namespace RegTools
 
                 url = String.Format("http://reg.163.com/services/getid");
                 items = new HttpItems();
-                items.URL = url;
+                  items.URL = url;
                 //items.Container = cc;
                 items.Cookie = Cookies;
-                items.ProxyIp = Proxy;
+                 items.ProxyIp = Proxy;
                 hr = helper.GetHtml(items, ref Cookies);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
@@ -111,7 +120,7 @@ namespace RegTools
                 //获取验证码数据
 
                 url = String.Format("http://reg.163.com/services/getimg?v=1448380241064&num=6&type=2&id={0}", codeID);
-                items = new HttpItems();
+                 items = new HttpItems();
                 items.URL = url;
                 ///items.Container = cc;
                 items.Cookie = Cookies;
@@ -121,23 +130,33 @@ namespace RegTools
 
                 codebytes = hr.ResultByte;
                 //获取验证码
-
+                 if(getImgCode ==null || codebytes ==null ||string.IsNullOrEmpty  (Vcode =getImgCode (codebytes )) )
+                {
+                    status = "验证码识别有问题："+Vcode;
+                    return false;
+                }
 
                 //正式提交注册数据
+                string winx1_2 = (((long)new Random().Next(100) * 10e4) + 10e6).ToString() + ((long.Parse(new XJHTTP().GetTimeByJs()) / 1000).ToString());
+                //username = "tempemail2";
+                //pwd = "tempemail2163";
+                //vcode = "29cbgx";
+                //codeId = "818e907d3eda65edfead7ec0f3f4d3ba1b45a181";
+                string codez = winx1_1 + "_" + winx1_2;
                 url = String.Format("https://reg.163.com/reg/innerDomainRegSubmit.do");
                 postData = String.Format(
-                    "url=http://db.163.com&product=db&loginurl=http%3A%2F%2Fdb.163.com&fromUrl=http%253A%252F%252Freg.163.com%252Freg%252Freg.jsp%253Fproduct%253Ddb%2526url%253Dhttp%25253A%25252F%25252Fdb.163.com%2526loginurl%253Dhttp%25253A%25252F%25252Fdb.163.com&u1=0&codez={0}&radomPassID={1}&username={2}&domain=%40163.com&password={3}&cpassword={4}&radomPass={5}&agree=on"
-                    , "NULL", codeID , user, pass, pass, Vcode);
+                    "url=http://"+pro+".163.com&product="+pro+"&loginurl=http%3A%2F%2F"+pro+".163.com&fromUrl=http%253A%252F%252Freg.163.com%252Freg%252Freg.jsp%253Fproduct%253D"+pro+"%2526url%253Dhttp%25253A%25252F%25252F"+pro+".163.com%2526loginurl%253Dhttp%25253A%25252F%25252F"+pro+".163.com&u1=0&codez={0}&radomPassID={1}&username={2}&domain=%40163.com&password={3}&cpassword={4}&radomPass={5}&agree=on"
+                    , codez, codeID , user, pass, pass, Vcode);
 
                 items = new HttpItems();
                 items.URL = url;
                 items.ProxyIp = Proxy;
                 items.Method = "POST";
                 items.Postdata = postData;
-                items.Referer = "http://reg.163.com/reg/innerDomainReg.do?product=db";
+                items.Referer = "http://reg.163.com/reg/innerDomainReg.do?product="+pro+"";
                 items.Cookie = "_ntes_nnid=; _ntes_nuid=;URS_Analyze=1; reg_info=" + new Random().Next(11111111, 100000000).ToString() + ";" + Cookies;
                 //items.Cookie = "_ntes_nnid=; _ntes_nuid=;URS_Analyze=1; reg_info=366303;JSESSIONID=decg0XMdMALNThAXai-ev;REG_ANALYSIS=85faf129-494a-480e-b2e8-13d3b46138a6;SID=403b5163-07a1-4493-a20e-8ed11e31d144;";
-                items.Allowautoredirect = false;
+                items.Allowautoredirect = true ;
                 hr = helper.GetHtml(items);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
@@ -155,7 +174,12 @@ namespace RegTools
                 }
                 else
                 {
-                    status += reHtml ;
+                    if(reHtml .Contains ("短信验证"))
+                    status += "短信验证" ;
+                    else
+                    {
+                        status +=reHtml ;
+                    }
                     return false;
                     //MessageBox.Show(reHtml);
                 }

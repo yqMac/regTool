@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -57,6 +59,12 @@ namespace RegTools
             }
         }
 
+
+
+
+        List<string> UserNameFromImported = new List<string>();
+
+        private int userNameformImportedIndex;
         #endregion
 
         #region  密码生成设置
@@ -77,15 +85,38 @@ namespace RegTools
                 return ran.Next(userPassLH, userPassLE + 1);
             }
         }
-        #endregion 
+        private string samePass;
+        #endregion
 
-        //验证码识别设置
+        #region  验证码识别设置
         /// <summary>
         /// 1、平台打码2、手动打码
         /// </summary>
         private int vCodeType;
+        /// <summary>
+        /// 用于手动输入验证码的等待问题
+        /// </summary>
+        private bool waitforbtn = false;
+
+        private string tmpCode = "";
 
 
+        #endregion 验证码
+
+        #region proxyip
+
+        /// <summary>
+        /// 1、宽带，2、代理ip池、3、不处理
+        /// </summary>
+        int proxyType = 3;
+
+        List<string> list_proxyips = new List<string>();
+
+        private int proxyipIndex;
+        #endregion proxyip
+        
+        
+        
         #endregion 变量
 
         #region 方法
@@ -96,78 +127,140 @@ namespace RegTools
         /// <returns></returns>
         public string GetName()
         {
+            //导入帐号
+            if (userNameType == 1)
+            {
+                if(userNameformImportedIndex <UserNameFromImported .Count)
+                {
+                    return UserNameFromImported[userNameformImportedIndex ++];
+                }else
+                {
+                    return "";
+                }
+            }
+
+            //规则随机帐号：
             int legth = userNameLenth;
             string name = string.Empty;
+            string a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string b = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
-
-
+            string s1 = "", s2 = "", s3 = "";
+            //前缀文本
             if (userNameHeadch &&!string.IsNullOrEmpty(userNameHead))
             {
                 legth = legth - userNameHead.Length;
-                name += userNameHead;
-
-            }
-           
+                s1 = userNameHead;
+            }         
+            //后缀文本 
             if(userNameEndch && !string.IsNullOrEmpty (userNameEnd))
             {
                 legth = legth - userNameEnd .Length;
-                for (int i = 0; i < legth ; i++)
-                {
-                    name += b[ran.Next(b.Length)];
-                }
-                name += userNameEnd;
-                
+                s3 = userNameEnd;
             }
-            else
+            s2 += a[ran.Next(a.Length)];
+            //随机文本
+            for (int i = 0; i < legth-1; i++)
             {
-                for (int i = 0; i < legth; i++)
-                {
-                    name += b[ran.Next(b.Length)];
-                }
+                s2 += b[ran.Next(b.Length)];
             }
+            //合成
+            name +=s1 +s2 +s3 ;
             return name;
         }
 
         public string GetPass()
         {
-            int legth = userPassLenth ;
+            //固定密码
+            if (userPassType == 1)
+            {
+                return samePass;
+            }
+            //规则生成密码
+            int legth = userPassLenth;
             string pass = string.Empty;
+            string a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string b = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+            string s1 = "", s2 = "", s3 = "";
 
-
+            //前缀
             if (userPassHeadch && !string.IsNullOrEmpty(userPassHead))
             {
                 legth = legth - userPassHead.Length;
-                pass += userPassHead;
+                s1 = userPassHead;
 
             }
-
+            //后缀
             if (userPassEndch && !string.IsNullOrEmpty(userPassEnd))
             {
                 legth = legth - userPassEnd.Length;
-                for (int i = 0; i < legth; i++)
-                {
-                    pass += b[ran.Next(b.Length)];
-                }
-                pass += userPassEnd;
-
+                s3 = userPassEnd;
             }
-            else
+            //随机
+            s2 += a[ran.Next(a.Length)];
+            for (int i = 0; i < legth-1; i++)
             {
-                for (int i = 0; i < legth; i++)
-                {
-                    pass += b[ran.Next(b.Length)];
-                }
+                s2 += b[ran.Next(b.Length)];
             }
+            //合成
+            pass += s1 + s2 + s3;
             return pass;
         }
 
+        public void Tsleep(int time)
+        {
+            Thread t = new Thread(o => Thread.Sleep(time));
+            t.Start();
+            while (t.IsAlive)
+            {
+                Thread.Sleep(1);
+                Application.DoEvents();
+            }
+        }
+        private string GetImgCode(byte [] bytes)
+        {
+            StringBuilder strb = new StringBuilder();
+            try
+            {
+                //手动输入验证码--单线程
+                if(vCodeType == 2)
+                {
+                    MemoryStream ms = new MemoryStream(bytes );
+                    Image image = System.Drawing.Image.FromStream(ms);
+                    picBox_Vcode.Image = image;
 
+                    waitforbtn = true;
+                    while (waitforbtn ||string.IsNullOrEmpty (tmpCode ))
+                    {
+                        Tsleep(10);
+                    }
+                    string code = tmpCode;
+                    tmpCode = string.Empty;
+                    return code;
+
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return strb.ToString();
+        }
 
 
         public void Reg()
         {
+            string status = string.Empty;
 
+            Email163 email = new Email163();
+            email.getImgCode = GetImgCode;
+            //email.setProxy("171.38.85.130:8123");
+            if(!email .RegUserPass (GetName (),GetPass(),ref status ))
+            {
+                MessageBox.Show(status );
+            }
+            else
+            {
+                MessageBox.Show("成功");
+            }
         }
 
 
@@ -180,14 +273,27 @@ namespace RegTools
             InitializeComponent();
         }
 
-        private void btn_Start_Click(object sender, EventArgs e)
+        private void btn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btn_Stop_Click(object sender, EventArgs e)
-        {
-
+            Button btn = (Button)sender;
+            switch (btn.Tag.ToString())
+            {
+                case "submitVCode":
+                    if(txt_Vcode .Text != "")
+                    {
+                        tmpCode = txt_Vcode.Text.Trim();                  
+                        waitforbtn = false;
+                        txt_Vcode.Text = "";
+                        picBox_Vcode.Image = null;
+                    }
+                    break;
+                case "Start":
+                    readSet();
+                     Reg();
+                    break;
+                default:
+                    break;
+            }
         }
 
         #region 配置改变触发事件
@@ -196,16 +302,102 @@ namespace RegTools
 
         #endregion 事件
 
+        public void readSet()
+        {
+            userNameLH = (int)num_user_h.Value;
+            userNameLE = (int)num_user_end.Value;
+            userNameHead = txt_user_head.Text.Trim();
+            userNameEnd = txt_user_end.Text.Trim();
+
+            userPassLH = (int)num_pass_h.Value;
+            userPassLE = (int)num_pass_end.Value;
+            userPassHead = txt_pass_head.Text.Trim();
+            userPassEnd = txt_pass_end.Text.Trim();
+            samePass = txt_pass_same.Text.Trim();
+
+            if (rab_User_o.Checked)
+            {
+                userNameType = 1;
+            }
+            else
+            {
+                userNameType = 2;
+            }
+            userNameHeadch = checkBox_userheadch.Checked;
+            userNameEndch = checkBox_userendch.Checked;
+
+            if (rab_Pwd_same.Checked)
+            {
+                userPassType = 1;
+            }
+            else
+            {
+                userPassType = 2;
+            }
+            userPassHeadch = checkBox_pwdheadch.Checked;
+            userPassEndch = checkBox_pwdendch.Checked;
+
+            if (rab_Vcode_p.Checked)
+            {
+                vCodeType = 1;
+            }
+            else
+            {
+                vCodeType = 2;
+            }
+
+            if (rab_IP_k.Checked)
+            {
+                proxyType = 1;
+            }
+            else if (rab_IP_proxy.Checked)
+            {
+                proxyType = 2;
+            }
+            else
+            {
+                proxyType = 3;
+            }
+
+        }
+
         private void rab_CheckedChanged(object sender, EventArgs e)
         {
+            return;
+            userNameLH = (int)num_user_h.Value;
+            userNameLE = (int)num_user_end.Value;
+            userNameHead = txt_user_head.Text.Trim();
+            userNameEnd = txt_user_end.Text.Trim();
+
+            userPassLH  = (int)num_pass_h .Value;
+            userPassLE = (int)num_pass_end .Value;
+            userPassHead = txt_pass_head .Text.Trim();
+            userPassEnd = txt_pass_end .Text.Trim();
+            samePass = txt_pass_same.Text.Trim();
+
+
+
             RadioButton rb = (RadioButton)sender;
             switch (rb.Tag.ToString ())
             {
                 case "User_Import":
+                    if(rab_User_o .Checked)
+                    {
 
+                    }else
+                    {
+                        userNameLH =(int ) num_user_h.Value;
+                        userNameLE = (int)num_user_end.Value;
+                        userNameHead = txt_user_head.Text.Trim();
+                        userNameEnd = txt_user_end.Text.Trim();
+
+                    }
                     break;
                 case "Pass_Same":
+                     if(rab_Pwd_gze  .Checked)
+                    {
 
+                    }
                     break;
                 case "VCode_Flat":
 
@@ -218,6 +410,29 @@ namespace RegTools
                 default:
                     break;
             }
+        }
+
+
+
+        private void txt_Vcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode ==Keys.Enter)
+            {
+                btn_Click(btn_submitVcode ,null );
+            }
+        }
+
+        private void checkBox_StrVcodeImg_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox_StrVcodeImg .Checked)
+            {
+                picBox_Vcode.SizeMode = PictureBoxSizeMode.Zoom  ;
+            }
+            else
+            {
+                picBox_Vcode.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+            picBox_Vcode.Refresh();
         }
     }
 }
