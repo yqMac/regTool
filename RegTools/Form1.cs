@@ -17,27 +17,14 @@ namespace RegTools
             InitializeComponent();
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void btn_Start_Click(object sender, EventArgs e)
         {
 
         }
-        
-    }
-    public interface RegDll
-    {
-        private string toolName;
-        private string toolAuthor;
-        private string toolVer;
-        
-        //private delegate string  GetImgCode(byte[] img);
-        //private GetImgCode getImgCode;
-        //private delegate void DealLogs(string);
-       // private DealLogs dealLogs;
-        
-        private string proxyIp=string.Empty;
-        private string user=string.Empty;
-        private string pass=string.Empty;
-        
-        public void Reg();
+
+        private void btn_Stop_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
