@@ -2,7 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using CsharpHttpHelper;
+using HttpCodeLib;
 
 namespace RegTools
 {
@@ -10,9 +10,9 @@ namespace RegTools
     {
         #region 变量
 
-        HttpHelper helper = null;
-        HttpItem items = null;
-        HttpResult hr = null;
+        HttpHelpers helper = null;
+        HttpItems items = null;
+        HttpResults hr = null;
         String Cookies = string.Empty;
         String Proxy = string.Empty;
 
@@ -26,8 +26,8 @@ namespace RegTools
         public Email163()
         {
 
-            helper = new HttpHelper();
-            items = new HttpItem();
+            helper = new HttpHelpers();
+            items = new HttpItems();
 
         }
 
@@ -47,7 +47,7 @@ namespace RegTools
             {
                 string url = String.Format("http://reg.email.163.com/unireg/call.do?cmd=urs.checkName");
                 string postdata = "name="+username ;
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
@@ -56,8 +56,8 @@ namespace RegTools
                 };
                 //items.Container = cc;
                 // items.ProxyIp = proxy ;
-                hr = helper.GetHtml(items);
-                Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 string reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
                 //Cookiesss += hr.Cookie;
@@ -104,13 +104,13 @@ namespace RegTools
 
                 //获取初始　JSESSIONID,SID两个唯一标识，返回的Cookie里面
                 string url = String.Format("http://reg.163.com/reg/innerDomainReg.do?product="+pro+"&url=http%3A%2F%2F"+pro+".163.com&loginurl=http%3A%2F%2F"+pro+".163.com");
-                items = new HttpItem() {
+                items = new HttpItems() {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy 
 
                 };
-                hr = helper.GetHtml(items);
+                hr = helper.GetHtml(items,ref Cookies);
                 Cookies += hr.Cookie;
                 string  reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
 
@@ -118,7 +118,7 @@ namespace RegTools
                 //获取验证码ID
 
                 url = String.Format("http://reg.163.com/services/getid");
-                items = new HttpItem() {
+                items = new HttpItems() {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy
@@ -136,7 +136,7 @@ namespace RegTools
                 //获取验证码数据
 
                 url = String.Format("http://reg.163.com/services/getimg?v=1448380241064&num=6&type=2&id={0}", codeID);
-                 items = new HttpItem() {
+                 items = new HttpItems() {
                      URL = url,
                      Cookie = Cookies,
                      ProxyIp = Proxy
@@ -144,9 +144,9 @@ namespace RegTools
                 items.URL = url;
                 ///items.Container = cc;
                 items.Cookie = Cookies;
-                items.ResultType = CsharpHttpHelper.Enum.ResultType.Byte;
+                items.ResultType = CsharpHttpHelpers.Enum.ResultType.Byte;
                 items.ProxyIp = Proxy;
-                hr = helper.GetHtml(items);
+                hr = helper.GetHtml(items,ref Cookies);
                 Cookies += hr.Cookie;
 
                 codebytes = hr.ResultByte;
@@ -169,7 +169,7 @@ namespace RegTools
                     "url=http://"+pro+".163.com&product="+pro+"&loginurl=http%3A%2F%2F"+pro+".163.com&fromUrl=http%253A%252F%252Freg.163.com%252Freg%252Freg.jsp%253Fproduct%253D"+pro+"%2526url%253Dhttp%25253A%25252F%25252F"+pro+".163.com%2526loginurl%253Dhttp%25253A%25252F%25252F"+pro+".163.com&u1=0&codez={0}&radomPassID={1}&username={2}&domain=%40163.com&password={3}&cpassword={4}&radomPass={5}&agree=on"
                     , codez, codeID , user, pass, pass, Vcode);
 
-                items = new HttpItems();
+                items = new HttpItemss();
                 items.URL = url;
                 items.ProxyIp = Proxy;
                 items.Method = "POST";
@@ -180,7 +180,7 @@ namespace RegTools
 
                 //items.Cookie = "_ntes_nnid=; _ntes_nuid=;URS_Analyze=1; reg_info=366303;JSESSIONID=decg0XMdMALNThAXai-ev;REG_ANALYSIS=85faf129-494a-480e-b2e8-13d3b46138a6;SID=403b5163-07a1-4493-a20e-8ed11e31d144;";
                 items.Allowautoredirect = true   ;
-                hr = helper.GetHtml(items);
+                hr = helper.GetHtml(items,ref Cookies);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
                 if (reHtml.Contains("您输入的图片中的文字不正确！"))
@@ -325,14 +325,14 @@ namespace RegTools
                 postdata = data[index];
                 index++;
 
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy
                 };
-                hr = helper.GetHtml(items);
-                Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 string reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
             }
             //reHtml = reHtml.Trim();
@@ -379,14 +379,14 @@ namespace RegTools
                 Cookies = "";
                 //获取初始　JSESSIONID,SID两个唯一标识，返回的Cookie里面
                 string url = string.Format("http://reg.email.163.com/unireg/call.do?cmd=register.entrance&from=163navi%C2%AEPage=163");
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy
                 };
-                hr = helper.GetHtml(items);
-                Cookies += HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+                //Cookies += HttpHelpers.GetSmallCookie(hr.Cookie);
                 string reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 //reHtml = reHtml.Trim();
                 if (reHtml == "无法连接到远程服务器")
@@ -404,21 +404,21 @@ namespace RegTools
                     return false;
                 }
                 GETVCODE:
-               
+
 
                 //获取验证码数据
 
-                url = String.Format("http://reg.email.163.com/unireg/call.do?cmd=register.verifyCode&v=common/verifycode/vc_en&env={0}&t={1}", envalue,);
-                items = new HttpItem()
+                url = String.Format("http://reg.email.163.com/unireg/call.do?cmd=register.verifyCode&v=common/verifycode/vc_en&env={0}&t={1}", envalue, new XJHTTP().GetTimeByJs());
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy,
-                    ResultType = CsharpHttpHelper.Enum.ResultType.Byte
+                    ResultType = ResultType.Byte 
                 };
 
-                hr = helper.GetHtml(items);
-                Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies );
+                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 codebytes = hr.ResultByte;
                 //获取验证码
                 if (codebytes.Length < 100 || getImgCode == null || codebytes == null || string.IsNullOrEmpty(Vcode = getImgCode(codebytes)))
@@ -438,20 +438,20 @@ namespace RegTools
                 string sd = GetStringMid(Cookies,"ser_adapter=",";");
                 //prepare
                 url = String.Format("https://ssl.mail.163.com/regall/unireg/prepare.jsp?sid={0}&sd={1}", sid, sd);
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy,
-                    KeepAlive = true,
+                    //KeepAlive = true,
                     CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
                     //ProtocolVersion = System.Net.HttpVersion.Version10 
                 };
                 //items.CerPath = System.Environment.CurrentDirectory + @"\163reg.cer";
-                hr = helper.GetHtml(items);
-                //Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
-                Cookies =Cookies.Replace(";;",";");
+               // Cookies =Cookies.Replace(";;",";");
 
 
 
@@ -462,35 +462,35 @@ namespace RegTools
                 postData = String.Format(
                     "name={0}&flow=main&uid={1}%40163.com&password={2}&confirmPassword={3}&mobile=&vcode={4}&from=163navi%C2%AEPage%3D163"
                     , user, user, pass, pass, Vcode);
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy,
                     Method = "POST",
-                    PostDataType = CsharpHttpHelper.Enum.PostDataType.String,
+                    //PostDataType = CsharpHttpHelpers.Enum.PostDataType.String,
                     Postdata = postData,
-                    KeepAlive =true ,
+                    //KeepAlive =true ,
                     Referer = "http://reg.email.163.com/unireg/call.do?cmd=register.entrance&from=163navi%C2%AEPage=163",
                     Allowautoredirect = false ,
                     CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
                     //ProtocolVersion = System.Net.HttpVersion.Version10
                 };
-                hr = helper.GetHtml(items);
-                Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+               // Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
 
-                //Cookies = HttpHelper.GetSmallCookie(Cookies );
+                //Cookies = HttpHelpers.GetSmallCookie(Cookies );
                  url = string.Format("http://entry.mail.163.com/coremail/fcg/ntesdoor2");
-                items = new HttpItem()
+                items = new HttpItems()
                 {
                     URL = url,
                     Cookie = Cookies,
                     ProxyIp = Proxy
                 };
-                hr = helper.GetHtml(items);
-                Cookies +=  HttpHelper.GetSmallCookie(hr.Cookie);
+                hr = helper.GetHtml(items,ref Cookies);
+                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                  reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 //reHtml = reHtml.Trim();
                 if (reHtml == "无法连接到远程服务器")

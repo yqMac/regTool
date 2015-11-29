@@ -33,9 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HttpHelper, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\HttpHelper万能框架V1.6.zip\CsharpHttpHelper\bin\Debug\HttpHelper.dll</HintPath>
+    <Reference Include="HttpCodeLib">
+      <HintPath>..\..\HttpCodeLib\HttpCodeLib\bin\Debug\HttpCodeLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
