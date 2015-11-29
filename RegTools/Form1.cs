@@ -252,7 +252,7 @@ namespace RegTools
 
             Email163 email = new Email163();
             email.getImgCode = GetImgCode;
-            //email.setProxy("171.38.85.130:8123");
+            //email.setProxy("182.92.8.19:1080");
             if(!email .RegUserPass (GetName (),GetPass(),ref status ))
             {
                 MessageBox.Show(status );

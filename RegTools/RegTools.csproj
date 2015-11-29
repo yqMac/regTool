@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HttpCodeLib">
-      <HintPath>..\..\HttpCodeLib\HttpCodeLib\bin\Debug\HttpCodeLib.dll</HintPath>
+    <Reference Include="HttpHelper, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\HttpHelper万能框架V1.6.zip\CsharpHttpHelper\bin\Debug\HttpHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +47,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="yq.Classes">
+      <HintPath>..\..\ClassCollection\Dll_OUTPUT\整合\yq.Classes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
