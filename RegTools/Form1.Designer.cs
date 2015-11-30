@@ -35,11 +35,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tp_tag = new System.Windows.Forms.TabPage();
             this.tp_ip = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_pppoe_save = new System.Windows.Forms.Button();
+            this.txtBox_pppoe_num = new System.Windows.Forms.TextBox();
+            this.txtBox_pppoe_pwd = new System.Windows.Forms.TextBox();
+            this.txtBox_pppoe_user = new System.Windows.Forms.TextBox();
             this.rab_IP_Nodo = new System.Windows.Forms.RadioButton();
             this.rab_IP_proxy = new System.Windows.Forms.RadioButton();
             this.rab_IP_k = new System.Windows.Forms.RadioButton();
             this.panel_IP_proxy = new System.Windows.Forms.Panel();
+            this.listView_Proxyip = new System.Windows.Forms.ListView();
+            this.id_proxyip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.proxyip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel_IP_k = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtBox_proxy_page = new System.Windows.Forms.TextBox();
+            this.txtBox_proxy_regex = new System.Windows.Forms.TextBox();
+            this.txtBox_proxyHtml = new System.Windows.Forms.TextBox();
+            this.btn_proxy_get = new System.Windows.Forms.Button();
             this.tp_vcode = new System.Windows.Forms.TabPage();
             this.panel_Vcode_hand = new System.Windows.Forms.Panel();
             this.checkBox_StrVcodeImg = new System.Windows.Forms.CheckBox();
@@ -48,31 +66,45 @@
             this.txt_Vcode = new System.Windows.Forms.TextBox();
             this.picBox_Vcode = new System.Windows.Forms.PictureBox();
             this.panel_Vcode_p = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_codeLogin = new System.Windows.Forms.Button();
             this.ran_Vcode_handl = new System.Windows.Forms.RadioButton();
             this.rab_Vcode_p = new System.Windows.Forms.RadioButton();
             this.tp_user = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.btn_AddGiven = new System.Windows.Forms.Button();
-            this.txtBox_GivenPass = new System.Windows.Forms.TextBox();
             this.txtBox_GivenUser = new System.Windows.Forms.TextBox();
+            this.txtBox_GivenPass = new System.Windows.Forms.TextBox();
+            this.btn_user_Clear = new System.Windows.Forms.Button();
             this.txtBox_CreateUserNum = new System.Windows.Forms.TextBox();
             this.panel_CreatPass = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.rab_createPwd = new System.Windows.Forms.RadioButton();
+            this.txtBox_pwd_end = new System.Windows.Forms.TextBox();
+            this.txtBox_pwd_same = new System.Windows.Forms.TextBox();
+            this.checkBox_pwd_end = new System.Windows.Forms.CheckBox();
+            this.rab_samePwd = new System.Windows.Forms.RadioButton();
+            this.txtBox_pwd_head = new System.Windows.Forms.TextBox();
+            this.checkBox_pwd_head = new System.Windows.Forms.CheckBox();
+            this.num_pwd_head = new System.Windows.Forms.NumericUpDown();
+            this.num_pwd_end = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_autoCreateUsers = new System.Windows.Forms.Button();
             this.panel_User_r = new System.Windows.Forms.Panel();
             this.listView_UserPass = new System.Windows.Forms.ListView();
+            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.user = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pwd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.panel_CreatUser = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -86,36 +118,8 @@
             this.tp_log = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.user = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pwd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.listView_Proxyip = new System.Windows.Forms.ListView();
-            this.id_proxyip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.proxyip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btn_proxy_get = new System.Windows.Forms.Button();
-            this.txtBox_proxyHtml = new System.Windows.Forms.TextBox();
-            this.txtBox_proxy_regex = new System.Windows.Forms.TextBox();
-            this.txtBox_proxy_page = new System.Windows.Forms.TextBox();
-            this.txtBox_pppoe_user = new System.Windows.Forms.TextBox();
-            this.txtBox_pppoe_pwd = new System.Windows.Forms.TextBox();
-            this.txtBox_pppoe_num = new System.Windows.Forms.TextBox();
-            this.btn_pppoe_save = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.btn_codeLogin = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.tp_ip.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel_IP_proxy.SuspendLayout();
             this.panel_IP_k.SuspendLayout();
             this.tp_vcode.SuspendLayout();
@@ -123,16 +127,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Vcode)).BeginInit();
             this.panel_Vcode_p.SuspendLayout();
             this.tp_user.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel_CreatPass.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_pwd_head)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_pwd_end)).BeginInit();
             this.panel_User_r.SuspendLayout();
             this.panel_CreatUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_user_end)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_user_h)).BeginInit();
             this.tp_log.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comb_Proj
@@ -160,6 +164,7 @@
             this.btn_Stop.Name = "btn_Stop";
             this.btn_Stop.Size = new System.Drawing.Size(151, 23);
             this.btn_Stop.TabIndex = 3;
+            this.btn_Stop.Tag = "btn_Stop";
             this.btn_Stop.Text = "Stop";
             this.btn_Stop.UseVisualStyleBackColor = true;
             this.btn_Stop.Click += new System.EventHandler(this.btn_Click);
@@ -197,6 +202,81 @@
             this.tp_ip.Text = "IP地址";
             this.tp_ip.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.btn_pppoe_save);
+            this.panel1.Controls.Add(this.txtBox_pppoe_num);
+            this.panel1.Controls.Add(this.txtBox_pppoe_pwd);
+            this.panel1.Controls.Add(this.txtBox_pppoe_user);
+            this.panel1.Location = new System.Drawing.Point(215, 156);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(329, 67);
+            this.panel1.TabIndex = 9;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(2, 35);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 12);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "个/ip：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(169, 7);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "密码：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "帐号：";
+            // 
+            // btn_pppoe_save
+            // 
+            this.btn_pppoe_save.Location = new System.Drawing.Point(167, 28);
+            this.btn_pppoe_save.Name = "btn_pppoe_save";
+            this.btn_pppoe_save.Size = new System.Drawing.Size(147, 24);
+            this.btn_pppoe_save.TabIndex = 3;
+            this.btn_pppoe_save.Text = "保存";
+            this.btn_pppoe_save.UseVisualStyleBackColor = true;
+            // 
+            // txtBox_pppoe_num
+            // 
+            this.txtBox_pppoe_num.Location = new System.Drawing.Point(49, 30);
+            this.txtBox_pppoe_num.Name = "txtBox_pppoe_num";
+            this.txtBox_pppoe_num.Size = new System.Drawing.Size(99, 21);
+            this.txtBox_pppoe_num.TabIndex = 2;
+            this.txtBox_pppoe_num.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtBox_pppoe_pwd
+            // 
+            this.txtBox_pppoe_pwd.Location = new System.Drawing.Point(213, 3);
+            this.txtBox_pppoe_pwd.Name = "txtBox_pppoe_pwd";
+            this.txtBox_pppoe_pwd.Size = new System.Drawing.Size(100, 21);
+            this.txtBox_pppoe_pwd.TabIndex = 1;
+            this.txtBox_pppoe_pwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtBox_pppoe_user
+            // 
+            this.txtBox_pppoe_user.Location = new System.Drawing.Point(49, 3);
+            this.txtBox_pppoe_user.Name = "txtBox_pppoe_user";
+            this.txtBox_pppoe_user.Size = new System.Drawing.Size(100, 21);
+            this.txtBox_pppoe_user.TabIndex = 0;
+            this.txtBox_pppoe_user.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // rab_IP_Nodo
             // 
             this.rab_IP_Nodo.AutoSize = true;
@@ -225,7 +305,7 @@
             // rab_IP_k
             // 
             this.rab_IP_k.AutoSize = true;
-            this.rab_IP_k.Location = new System.Drawing.Point(215, 191);
+            this.rab_IP_k.Location = new System.Drawing.Point(215, 134);
             this.rab_IP_k.Name = "rab_IP_k";
             this.rab_IP_k.Size = new System.Drawing.Size(71, 16);
             this.rab_IP_k.TabIndex = 6;
@@ -243,6 +323,29 @@
             this.panel_IP_proxy.Size = new System.Drawing.Size(206, 278);
             this.panel_IP_proxy.TabIndex = 5;
             // 
+            // listView_Proxyip
+            // 
+            this.listView_Proxyip.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.id_proxyip,
+            this.proxyip});
+            this.listView_Proxyip.GridLines = true;
+            this.listView_Proxyip.Location = new System.Drawing.Point(-2, 0);
+            this.listView_Proxyip.Name = "listView_Proxyip";
+            this.listView_Proxyip.Size = new System.Drawing.Size(207, 261);
+            this.listView_Proxyip.TabIndex = 0;
+            this.listView_Proxyip.UseCompatibleStateImageBehavior = false;
+            this.listView_Proxyip.View = System.Windows.Forms.View.Details;
+            // 
+            // id_proxyip
+            // 
+            this.id_proxyip.Text = "ID";
+            this.id_proxyip.Width = 30;
+            // 
+            // proxyip
+            // 
+            this.proxyip.Text = "IP";
+            this.proxyip.Width = 100;
+            // 
             // panel_IP_k
             // 
             this.panel_IP_k.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -257,6 +360,63 @@
             this.panel_IP_k.Name = "panel_IP_k";
             this.panel_IP_k.Size = new System.Drawing.Size(333, 97);
             this.panel_IP_k.TabIndex = 4;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(11, 68);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 12);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "页数：";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(11, 39);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "正则：";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(11, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "网址：";
+            // 
+            // txtBox_proxy_page
+            // 
+            this.txtBox_proxy_page.Location = new System.Drawing.Point(53, 58);
+            this.txtBox_proxy_page.Name = "txtBox_proxy_page";
+            this.txtBox_proxy_page.Size = new System.Drawing.Size(46, 21);
+            this.txtBox_proxy_page.TabIndex = 3;
+            // 
+            // txtBox_proxy_regex
+            // 
+            this.txtBox_proxy_regex.Location = new System.Drawing.Point(53, 31);
+            this.txtBox_proxy_regex.Name = "txtBox_proxy_regex";
+            this.txtBox_proxy_regex.Size = new System.Drawing.Size(273, 21);
+            this.txtBox_proxy_regex.TabIndex = 2;
+            // 
+            // txtBox_proxyHtml
+            // 
+            this.txtBox_proxyHtml.Location = new System.Drawing.Point(53, 4);
+            this.txtBox_proxyHtml.Name = "txtBox_proxyHtml";
+            this.txtBox_proxyHtml.Size = new System.Drawing.Size(273, 21);
+            this.txtBox_proxyHtml.TabIndex = 1;
+            // 
+            // btn_proxy_get
+            // 
+            this.btn_proxy_get.Location = new System.Drawing.Point(130, 57);
+            this.btn_proxy_get.Name = "btn_proxy_get";
+            this.btn_proxy_get.Size = new System.Drawing.Size(75, 23);
+            this.btn_proxy_get.TabIndex = 0;
+            this.btn_proxy_get.Text = "获取";
+            this.btn_proxy_get.UseVisualStyleBackColor = true;
             // 
             // tp_vcode
             // 
@@ -301,7 +461,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(59, 216);
+            this.label8.Location = new System.Drawing.Point(57, 219);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 3;
@@ -324,8 +484,9 @@
             this.txt_Vcode.Name = "txt_Vcode";
             this.txt_Vcode.Size = new System.Drawing.Size(80, 21);
             this.txt_Vcode.TabIndex = 1;
+            this.txt_Vcode.Tag = "txt_Vcode";
             this.txt_Vcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_Vcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Vcode_KeyDown);
+            this.txt_Vcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBox_KeyDown);
             // 
             // picBox_Vcode
             // 
@@ -351,6 +512,75 @@
             this.panel_Vcode_p.Name = "panel_Vcode_p";
             this.panel_Vcode_p.Size = new System.Drawing.Size(254, 137);
             this.panel_Vcode_p.TabIndex = 3;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 111);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(65, 12);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "当前信息：";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 77);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 12);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "密码：";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 48);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(41, 12);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "帐号：";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 6);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 12);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "平台：";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(58, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 20);
+            this.comboBox1.TabIndex = 5;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(58, 72);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.TabIndex = 6;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(58, 45);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_codeLogin
+            // 
+            this.btn_codeLogin.Location = new System.Drawing.Point(164, 70);
+            this.btn_codeLogin.Name = "btn_codeLogin";
+            this.btn_codeLogin.Size = new System.Drawing.Size(75, 23);
+            this.btn_codeLogin.TabIndex = 5;
+            this.btn_codeLogin.Text = "登录";
+            this.btn_codeLogin.UseVisualStyleBackColor = true;
             // 
             // ran_Vcode_handl
             // 
@@ -379,11 +609,8 @@
             // 
             // tp_user
             // 
-            this.tp_user.Controls.Add(this.label12);
-            this.tp_user.Controls.Add(this.label11);
-            this.tp_user.Controls.Add(this.btn_AddGiven);
-            this.tp_user.Controls.Add(this.txtBox_GivenPass);
-            this.tp_user.Controls.Add(this.txtBox_GivenUser);
+            this.tp_user.Controls.Add(this.panel2);
+            this.tp_user.Controls.Add(this.btn_user_Clear);
             this.tp_user.Controls.Add(this.txtBox_CreateUserNum);
             this.tp_user.Controls.Add(this.panel_CreatPass);
             this.tp_user.Controls.Add(this.label9);
@@ -398,70 +625,107 @@
             this.tp_user.Text = "帐号";
             this.tp_user.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // panel2
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(253, 246);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "特定密码：";
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label21);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.btn_AddGiven);
+            this.panel2.Controls.Add(this.txtBox_GivenUser);
+            this.panel2.Controls.Add(this.txtBox_GivenPass);
+            this.panel2.Location = new System.Drawing.Point(238, 188);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(310, 93);
+            this.panel2.TabIndex = 17;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(27, 8);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(161, 12);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "空的内容有上面规则自动生成";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(253, 211);
+            this.label11.Location = new System.Drawing.Point(8, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 14;
             this.label11.Text = "特定帐号：";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 58);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "特定密码：";
+            // 
             // btn_AddGiven
             // 
-            this.btn_AddGiven.Location = new System.Drawing.Point(459, 206);
+            this.btn_AddGiven.Location = new System.Drawing.Point(226, 13);
             this.btn_AddGiven.Name = "btn_AddGiven";
             this.btn_AddGiven.Size = new System.Drawing.Size(69, 62);
             this.btn_AddGiven.TabIndex = 13;
+            this.btn_AddGiven.Tag = "btn_AddGiven";
             this.btn_AddGiven.Text = "添加单个特定帐号";
             this.btn_AddGiven.UseVisualStyleBackColor = true;
-            // 
-            // txtBox_GivenPass
-            // 
-            this.txtBox_GivenPass.Location = new System.Drawing.Point(316, 243);
-            this.txtBox_GivenPass.Name = "txtBox_GivenPass";
-            this.txtBox_GivenPass.Size = new System.Drawing.Size(136, 21);
-            this.txtBox_GivenPass.TabIndex = 12;
-            this.txtBox_GivenPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.btn_AddGiven.Click += new System.EventHandler(this.btn_Click);
             // 
             // txtBox_GivenUser
             // 
-            this.txtBox_GivenUser.Location = new System.Drawing.Point(316, 208);
+            this.txtBox_GivenUser.Location = new System.Drawing.Point(73, 31);
             this.txtBox_GivenUser.Name = "txtBox_GivenUser";
             this.txtBox_GivenUser.Size = new System.Drawing.Size(136, 21);
             this.txtBox_GivenUser.TabIndex = 11;
             this.txtBox_GivenUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // txtBox_GivenPass
+            // 
+            this.txtBox_GivenPass.Location = new System.Drawing.Point(73, 54);
+            this.txtBox_GivenPass.Name = "txtBox_GivenPass";
+            this.txtBox_GivenPass.Size = new System.Drawing.Size(136, 21);
+            this.txtBox_GivenPass.TabIndex = 12;
+            this.txtBox_GivenPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_user_Clear
+            // 
+            this.btn_user_Clear.Location = new System.Drawing.Point(460, 152);
+            this.btn_user_Clear.Name = "btn_user_Clear";
+            this.btn_user_Clear.Size = new System.Drawing.Size(82, 33);
+            this.btn_user_Clear.TabIndex = 16;
+            this.btn_user_Clear.Tag = "btn_user_Clear";
+            this.btn_user_Clear.Text = "清理列表";
+            this.btn_user_Clear.UseVisualStyleBackColor = true;
+            this.btn_user_Clear.Click += new System.EventHandler(this.btn_Click);
+            // 
             // txtBox_CreateUserNum
             // 
-            this.txtBox_CreateUserNum.Location = new System.Drawing.Point(459, 107);
+            this.txtBox_CreateUserNum.Location = new System.Drawing.Point(459, 90);
             this.txtBox_CreateUserNum.Name = "txtBox_CreateUserNum";
             this.txtBox_CreateUserNum.Size = new System.Drawing.Size(82, 21);
             this.txtBox_CreateUserNum.TabIndex = 10;
+            this.txtBox_CreateUserNum.Text = "1";
             this.txtBox_CreateUserNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel_CreatPass
             // 
             this.panel_CreatPass.Controls.Add(this.label7);
             this.panel_CreatPass.Controls.Add(this.label10);
-            this.panel_CreatPass.Controls.Add(this.radioButton1);
-            this.panel_CreatPass.Controls.Add(this.textBox2);
-            this.panel_CreatPass.Controls.Add(this.textBox3);
-            this.panel_CreatPass.Controls.Add(this.checkBox1);
-            this.panel_CreatPass.Controls.Add(this.radioButton2);
-            this.panel_CreatPass.Controls.Add(this.textBox4);
-            this.panel_CreatPass.Controls.Add(this.checkBox2);
-            this.panel_CreatPass.Controls.Add(this.numericUpDown1);
-            this.panel_CreatPass.Controls.Add(this.numericUpDown2);
+            this.panel_CreatPass.Controls.Add(this.rab_createPwd);
+            this.panel_CreatPass.Controls.Add(this.txtBox_pwd_end);
+            this.panel_CreatPass.Controls.Add(this.txtBox_pwd_same);
+            this.panel_CreatPass.Controls.Add(this.checkBox_pwd_end);
+            this.panel_CreatPass.Controls.Add(this.rab_samePwd);
+            this.panel_CreatPass.Controls.Add(this.txtBox_pwd_head);
+            this.panel_CreatPass.Controls.Add(this.checkBox_pwd_head);
+            this.panel_CreatPass.Controls.Add(this.num_pwd_head);
+            this.panel_CreatPass.Controls.Add(this.num_pwd_end);
             this.panel_CreatPass.Location = new System.Drawing.Point(238, 73);
             this.panel_CreatPass.Name = "panel_CreatPass";
             this.panel_CreatPass.Size = new System.Drawing.Size(218, 113);
@@ -485,95 +749,95 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "---";
             // 
-            // radioButton1
+            // rab_createPwd
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(5, 35);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.Text = "生成密码";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rab_createPwd.AutoSize = true;
+            this.rab_createPwd.Location = new System.Drawing.Point(5, 35);
+            this.rab_createPwd.Name = "rab_createPwd";
+            this.rab_createPwd.Size = new System.Drawing.Size(71, 16);
+            this.rab_createPwd.TabIndex = 1;
+            this.rab_createPwd.Text = "生成密码";
+            this.rab_createPwd.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtBox_pwd_end
             // 
-            this.textBox2.Location = new System.Drawing.Point(78, 86);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(130, 21);
-            this.textBox2.TabIndex = 14;
-            this.textBox2.Text = "mac";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBox_pwd_end.Location = new System.Drawing.Point(78, 86);
+            this.txtBox_pwd_end.Name = "txtBox_pwd_end";
+            this.txtBox_pwd_end.Size = new System.Drawing.Size(130, 21);
+            this.txtBox_pwd_end.TabIndex = 14;
+            this.txtBox_pwd_end.Text = "mac";
+            this.txtBox_pwd_end.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox3
+            // txtBox_pwd_same
             // 
-            this.textBox3.Location = new System.Drawing.Point(86, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(117, 21);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.Text = "yqmacPASS";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBox_pwd_same.Location = new System.Drawing.Point(79, 3);
+            this.txtBox_pwd_same.Name = "txtBox_pwd_same";
+            this.txtBox_pwd_same.Size = new System.Drawing.Size(127, 21);
+            this.txtBox_pwd_same.TabIndex = 16;
+            this.txtBox_pwd_same.Text = "yqmacPASS";
+            this.txtBox_pwd_same.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // checkBox1
+            // checkBox_pwd_end
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(5, 91);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 16);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "密码后缀：";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox_pwd_end.AutoSize = true;
+            this.checkBox_pwd_end.Location = new System.Drawing.Point(5, 91);
+            this.checkBox_pwd_end.Name = "checkBox_pwd_end";
+            this.checkBox_pwd_end.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_pwd_end.TabIndex = 13;
+            this.checkBox_pwd_end.Text = "密码后缀：";
+            this.checkBox_pwd_end.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rab_samePwd
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(5, 3);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 16);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Tag = "Pass_Same";
-            this.radioButton2.Text = "固定密码";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rab_samePwd.AutoSize = true;
+            this.rab_samePwd.Checked = true;
+            this.rab_samePwd.Location = new System.Drawing.Point(5, 3);
+            this.rab_samePwd.Name = "rab_samePwd";
+            this.rab_samePwd.Size = new System.Drawing.Size(71, 16);
+            this.rab_samePwd.TabIndex = 0;
+            this.rab_samePwd.TabStop = true;
+            this.rab_samePwd.Tag = "Pass_Same";
+            this.rab_samePwd.Text = "固定密码";
+            this.rab_samePwd.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // txtBox_pwd_head
             // 
-            this.textBox4.Location = new System.Drawing.Point(78, 57);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(130, 21);
-            this.textBox4.TabIndex = 12;
-            this.textBox4.Text = "yq";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBox_pwd_head.Location = new System.Drawing.Point(78, 57);
+            this.txtBox_pwd_head.Name = "txtBox_pwd_head";
+            this.txtBox_pwd_head.Size = new System.Drawing.Size(130, 21);
+            this.txtBox_pwd_head.TabIndex = 12;
+            this.txtBox_pwd_head.Text = "yq";
+            this.txtBox_pwd_head.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // checkBox2
+            // checkBox_pwd_head
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(5, 62);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(84, 16);
-            this.checkBox2.TabIndex = 11;
-            this.checkBox2.Text = "密码前缀：";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox_pwd_head.AutoSize = true;
+            this.checkBox_pwd_head.Location = new System.Drawing.Point(5, 62);
+            this.checkBox_pwd_head.Name = "checkBox_pwd_head";
+            this.checkBox_pwd_head.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_pwd_head.TabIndex = 11;
+            this.checkBox_pwd_head.Text = "密码前缀：";
+            this.checkBox_pwd_head.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // num_pwd_head
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(78, 35);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(42, 21);
-            this.numericUpDown1.TabIndex = 9;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.num_pwd_head.Location = new System.Drawing.Point(78, 35);
+            this.num_pwd_head.Name = "num_pwd_head";
+            this.num_pwd_head.Size = new System.Drawing.Size(42, 21);
+            this.num_pwd_head.TabIndex = 9;
+            this.num_pwd_head.Value = new decimal(new int[] {
             6,
             0,
             0,
             0});
             // 
-            // numericUpDown2
+            // num_pwd_end
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(147, 35);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(40, 21);
-            this.numericUpDown2.TabIndex = 10;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.num_pwd_end.Location = new System.Drawing.Point(147, 35);
+            this.num_pwd_end.Name = "num_pwd_end";
+            this.num_pwd_end.Size = new System.Drawing.Size(40, 21);
+            this.num_pwd_end.TabIndex = 10;
+            this.num_pwd_end.Value = new decimal(new int[] {
             8,
             0,
             0,
@@ -582,7 +846,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(462, 92);
+            this.label9.Location = new System.Drawing.Point(462, 75);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(77, 12);
             this.label9.TabIndex = 9;
@@ -590,13 +854,14 @@
             // 
             // btn_autoCreateUsers
             // 
-            this.btn_autoCreateUsers.Location = new System.Drawing.Point(459, 141);
+            this.btn_autoCreateUsers.Location = new System.Drawing.Point(459, 112);
             this.btn_autoCreateUsers.Name = "btn_autoCreateUsers";
-            this.btn_autoCreateUsers.Size = new System.Drawing.Size(82, 45);
+            this.btn_autoCreateUsers.Size = new System.Drawing.Size(82, 39);
             this.btn_autoCreateUsers.TabIndex = 8;
+            this.btn_autoCreateUsers.Tag = "btn_autoCreateUsers";
             this.btn_autoCreateUsers.Text = "自动生成";
             this.btn_autoCreateUsers.UseVisualStyleBackColor = true;
-            this.btn_autoCreateUsers.Click += new System.EventHandler(this.button1_Click);
+            this.btn_autoCreateUsers.Click += new System.EventHandler(this.btn_Click);
             // 
             // panel_User_r
             // 
@@ -614,13 +879,31 @@
             this.id,
             this.user,
             this.pwd});
+            this.listView_UserPass.FullRowSelect = true;
             this.listView_UserPass.GridLines = true;
-            this.listView_UserPass.Location = new System.Drawing.Point(3, 2);
+            this.listView_UserPass.Location = new System.Drawing.Point(1, 2);
             this.listView_UserPass.Name = "listView_UserPass";
-            this.listView_UserPass.Size = new System.Drawing.Size(221, 256);
+            this.listView_UserPass.Size = new System.Drawing.Size(224, 256);
             this.listView_UserPass.TabIndex = 8;
             this.listView_UserPass.UseCompatibleStateImageBehavior = false;
             this.listView_UserPass.View = System.Windows.Forms.View.Details;
+            this.listView_UserPass.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView_DragDrop);
+            this.listView_UserPass.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView_DragEnter);
+            // 
+            // id
+            // 
+            this.id.Text = "ID";
+            this.id.Width = 25;
+            // 
+            // user
+            // 
+            this.user.Text = "User";
+            this.user.Width = 80;
+            // 
+            // pwd
+            // 
+            this.pwd.Text = "Pwd";
+            this.pwd.Width = 100;
             // 
             // label2
             // 
@@ -650,7 +933,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(107, 10);
+            this.label4.Location = new System.Drawing.Point(126, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(23, 12);
             this.label4.TabIndex = 7;
@@ -677,7 +960,7 @@
             // 
             // txt_user_head
             // 
-            this.txt_user_head.Location = new System.Drawing.Point(80, 33);
+            this.txt_user_head.Location = new System.Drawing.Point(79, 33);
             this.txt_user_head.Name = "txt_user_head";
             this.txt_user_head.Size = new System.Drawing.Size(59, 21);
             this.txt_user_head.TabIndex = 4;
@@ -696,7 +979,7 @@
             // 
             // num_user_end
             // 
-            this.num_user_end.Location = new System.Drawing.Point(136, 8);
+            this.num_user_end.Location = new System.Drawing.Point(155, 8);
             this.num_user_end.Name = "num_user_end";
             this.num_user_end.Size = new System.Drawing.Size(40, 21);
             this.num_user_end.TabIndex = 2;
@@ -708,7 +991,7 @@
             // 
             // num_user_h
             // 
-            this.num_user_h.Location = new System.Drawing.Point(59, 8);
+            this.num_user_h.Location = new System.Drawing.Point(78, 8);
             this.num_user_h.Name = "num_user_h";
             this.num_user_h.Size = new System.Drawing.Size(42, 21);
             this.num_user_h.TabIndex = 1;
@@ -721,7 +1004,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 10);
+            this.label3.Location = new System.Drawing.Point(12, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 0;
@@ -758,243 +1041,6 @@
             this.tabControl1.Size = new System.Drawing.Size(559, 309);
             this.tabControl1.TabIndex = 1;
             // 
-            // id
-            // 
-            this.id.Text = "ID";
-            this.id.Width = 30;
-            // 
-            // user
-            // 
-            this.user.Text = "User";
-            this.user.Width = 90;
-            // 
-            // pwd
-            // 
-            this.pwd.Text = "Pwd";
-            this.pwd.Width = 90;
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.btn_pppoe_save);
-            this.panel1.Controls.Add(this.txtBox_pppoe_num);
-            this.panel1.Controls.Add(this.txtBox_pppoe_pwd);
-            this.panel1.Controls.Add(this.txtBox_pppoe_user);
-            this.panel1.Location = new System.Drawing.Point(215, 213);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 67);
-            this.panel1.TabIndex = 9;
-            // 
-            // listView_Proxyip
-            // 
-            this.listView_Proxyip.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.id_proxyip,
-            this.proxyip});
-            this.listView_Proxyip.GridLines = true;
-            this.listView_Proxyip.Location = new System.Drawing.Point(-2, 0);
-            this.listView_Proxyip.Name = "listView_Proxyip";
-            this.listView_Proxyip.Size = new System.Drawing.Size(207, 261);
-            this.listView_Proxyip.TabIndex = 0;
-            this.listView_Proxyip.UseCompatibleStateImageBehavior = false;
-            this.listView_Proxyip.View = System.Windows.Forms.View.Details;
-            // 
-            // id_proxyip
-            // 
-            this.id_proxyip.Text = "ID";
-            this.id_proxyip.Width = 30;
-            // 
-            // proxyip
-            // 
-            this.proxyip.Text = "IP";
-            this.proxyip.Width = 100;
-            // 
-            // btn_proxy_get
-            // 
-            this.btn_proxy_get.Location = new System.Drawing.Point(159, 57);
-            this.btn_proxy_get.Name = "btn_proxy_get";
-            this.btn_proxy_get.Size = new System.Drawing.Size(75, 23);
-            this.btn_proxy_get.TabIndex = 0;
-            this.btn_proxy_get.Text = "获取";
-            this.btn_proxy_get.UseVisualStyleBackColor = true;
-            // 
-            // txtBox_proxyHtml
-            // 
-            this.txtBox_proxyHtml.Location = new System.Drawing.Point(71, 3);
-            this.txtBox_proxyHtml.Name = "txtBox_proxyHtml";
-            this.txtBox_proxyHtml.Size = new System.Drawing.Size(257, 21);
-            this.txtBox_proxyHtml.TabIndex = 1;
-            // 
-            // txtBox_proxy_regex
-            // 
-            this.txtBox_proxy_regex.Location = new System.Drawing.Point(71, 30);
-            this.txtBox_proxy_regex.Name = "txtBox_proxy_regex";
-            this.txtBox_proxy_regex.Size = new System.Drawing.Size(257, 21);
-            this.txtBox_proxy_regex.TabIndex = 2;
-            // 
-            // txtBox_proxy_page
-            // 
-            this.txtBox_proxy_page.Location = new System.Drawing.Point(71, 57);
-            this.txtBox_proxy_page.Name = "txtBox_proxy_page";
-            this.txtBox_proxy_page.Size = new System.Drawing.Size(46, 21);
-            this.txtBox_proxy_page.TabIndex = 3;
-            // 
-            // txtBox_pppoe_user
-            // 
-            this.txtBox_pppoe_user.Location = new System.Drawing.Point(49, 3);
-            this.txtBox_pppoe_user.Name = "txtBox_pppoe_user";
-            this.txtBox_pppoe_user.Size = new System.Drawing.Size(100, 21);
-            this.txtBox_pppoe_user.TabIndex = 0;
-            // 
-            // txtBox_pppoe_pwd
-            // 
-            this.txtBox_pppoe_pwd.Location = new System.Drawing.Point(213, 3);
-            this.txtBox_pppoe_pwd.Name = "txtBox_pppoe_pwd";
-            this.txtBox_pppoe_pwd.Size = new System.Drawing.Size(100, 21);
-            this.txtBox_pppoe_pwd.TabIndex = 1;
-            this.txtBox_pppoe_pwd.Text = "密码：";
-            // 
-            // txtBox_pppoe_num
-            // 
-            this.txtBox_pppoe_num.Location = new System.Drawing.Point(81, 30);
-            this.txtBox_pppoe_num.Name = "txtBox_pppoe_num";
-            this.txtBox_pppoe_num.Size = new System.Drawing.Size(64, 21);
-            this.txtBox_pppoe_num.TabIndex = 2;
-            // 
-            // btn_pppoe_save
-            // 
-            this.btn_pppoe_save.Location = new System.Drawing.Point(166, 30);
-            this.btn_pppoe_save.Name = "btn_pppoe_save";
-            this.btn_pppoe_save.Size = new System.Drawing.Size(143, 23);
-            this.btn_pppoe_save.TabIndex = 3;
-            this.btn_pppoe_save.Text = "保存";
-            this.btn_pppoe_save.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "帐号：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(164, 7);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "密码：";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 35);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(83, 12);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "注册个数/ip：";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(11, 6);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "网址：";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 39);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 12);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "正则：";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 68);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "页数：";
-            // 
-            // btn_codeLogin
-            // 
-            this.btn_codeLogin.Location = new System.Drawing.Point(164, 70);
-            this.btn_codeLogin.Name = "btn_codeLogin";
-            this.btn_codeLogin.Size = new System.Drawing.Size(75, 23);
-            this.btn_codeLogin.TabIndex = 5;
-            this.btn_codeLogin.Text = "登录";
-            this.btn_codeLogin.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(58, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(58, 72);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 6;
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(58, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 20);
-            this.comboBox1.TabIndex = 5;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 6);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 12);
-            this.label17.TabIndex = 5;
-            this.label17.Text = "平台：";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(13, 48);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 12);
-            this.label18.TabIndex = 7;
-            this.label18.Text = "帐号：";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 77);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 12);
-            this.label19.TabIndex = 8;
-            this.label19.Text = "密码：";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(13, 111);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(65, 12);
-            this.label20.TabIndex = 5;
-            this.label20.Text = "当前信息：";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1010,6 +1056,8 @@
             this.Text = "通用注册机";
             this.tp_ip.ResumeLayout(false);
             this.tp_ip.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel_IP_proxy.ResumeLayout(false);
             this.panel_IP_k.ResumeLayout(false);
             this.panel_IP_k.PerformLayout();
@@ -1022,10 +1070,12 @@
             this.panel_Vcode_p.PerformLayout();
             this.tp_user.ResumeLayout(false);
             this.tp_user.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel_CreatPass.ResumeLayout(false);
             this.panel_CreatPass.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_pwd_head)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_pwd_end)).EndInit();
             this.panel_User_r.ResumeLayout(false);
             this.panel_User_r.PerformLayout();
             this.panel_CreatUser.ResumeLayout(false);
@@ -1034,8 +1084,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_user_h)).EndInit();
             this.tp_log.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1074,15 +1122,15 @@
         private System.Windows.Forms.Panel panel_CreatPass;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.RadioButton rab_createPwd;
+        private System.Windows.Forms.TextBox txtBox_pwd_end;
+        private System.Windows.Forms.TextBox txtBox_pwd_same;
+        private System.Windows.Forms.CheckBox checkBox_pwd_end;
+        private System.Windows.Forms.RadioButton rab_samePwd;
+        private System.Windows.Forms.TextBox txtBox_pwd_head;
+        private System.Windows.Forms.CheckBox checkBox_pwd_head;
+        private System.Windows.Forms.NumericUpDown num_pwd_head;
+        private System.Windows.Forms.NumericUpDown num_pwd_end;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_autoCreateUsers;
         private System.Windows.Forms.Panel panel_User_r;
@@ -1129,6 +1177,9 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btn_user_Clear;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label21;
     }
 }
 

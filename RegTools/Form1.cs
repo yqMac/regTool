@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -114,108 +115,21 @@ namespace RegTools
 
         private int proxyipIndex;
         #endregion proxyip
-        
-        
-        
+
+
+
+        Dictionary<string, string> dic_UserPwd = new Dictionary<string, string>();
+
         #endregion 变量
 
         #region 方法
 
+      
         /// <summary>
-        /// 根据规则创建用户名
+        /// 验证码识别ｆｏｒ　ｂｙｔｅ[]
         /// </summary>
+        /// <param name="bytes"></param>
         /// <returns></returns>
-        public string GetName()
-        {
-            //导入帐号
-            if (userNameType == 1)
-            {
-                if(userNameformImportedIndex <UserNameFromImported .Count)
-                {
-                    return UserNameFromImported[userNameformImportedIndex ++];
-                }else
-                {
-                    return "";
-                }
-            }
-
-            //规则随机帐号：
-            int legth = userNameLenth;
-            string name = string.Empty;
-            string a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string b = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
-            string s1 = "", s2 = "", s3 = "";
-            //前缀文本
-            if (userNameHeadch &&!string.IsNullOrEmpty(userNameHead))
-            {
-                legth = legth - userNameHead.Length;
-                s1 = userNameHead;
-            }         
-            //后缀文本 
-            if(userNameEndch && !string.IsNullOrEmpty (userNameEnd))
-            {
-                legth = legth - userNameEnd .Length;
-                s3 = userNameEnd;
-            }
-            s2 += a[ran.Next(a.Length)];
-            //随机文本
-            for (int i = 0; i < legth-1; i++)
-            {
-                s2 += b[ran.Next(b.Length)];
-            }
-            //合成
-            name +=s1 +s2 +s3 ;
-            return name;
-        }
-
-        public string GetPass()
-        {
-            //固定密码
-            if (userPassType == 1)
-            {
-                return samePass;
-            }
-            //规则生成密码
-            int legth = userPassLenth;
-            string pass = string.Empty;
-            string a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string b = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
-            string s1 = "", s2 = "", s3 = "";
-
-            //前缀
-            if (userPassHeadch && !string.IsNullOrEmpty(userPassHead))
-            {
-                legth = legth - userPassHead.Length;
-                s1 = userPassHead;
-
-            }
-            //后缀
-            if (userPassEndch && !string.IsNullOrEmpty(userPassEnd))
-            {
-                legth = legth - userPassEnd.Length;
-                s3 = userPassEnd;
-            }
-            //随机
-            s2 += a[ran.Next(a.Length)];
-            for (int i = 0; i < legth-1; i++)
-            {
-                s2 += b[ran.Next(b.Length)];
-            }
-            //合成
-            pass += s1 + s2 + s3;
-            return pass;
-        }
-
-        public void Tsleep(int time)
-        {
-            Thread t = new Thread(o => Thread.Sleep(time));
-            t.Start();
-            while (t.IsAlive)
-            {
-                Thread.Sleep(1);
-                Application.DoEvents();
-            }
-        }
         private string GetImgCode(byte [] bytes)
         {
             StringBuilder strb = new StringBuilder();
@@ -252,37 +166,139 @@ namespace RegTools
 
             Email163 email = new Email163();
             email.getImgCode = GetImgCode;
-            bool s=email.Login163("yqmacyuqiang","aa13655312932bb");
+            //bool s=email.Login163("yqmacyuqiang","aa13655312932bb");
             //email.setProxy("121.69.24.22:8118");//121.69.24.22:8118
-            if (!email .RegUserPass (GetName (),GetPass(),ref status ))
+            string name = CreateName();
+            string pwd = CreatePwd();
+            if (!email .RegUserPass (name, name,ref status ))
             {
-                MessageBox.Show(status );
+                bool s = email.Login163(name , pwd );
+                MessageBox.Show((s?"登录成功":"登录失败")+"\n"+status );
             }
             else
             {
-                MessageBox.Show("成功");
+                bool s = email.Login163(name, pwd);
+                MessageBox.Show((s ? "登录成功" : "登录失败") + "\n" + status);
             }
         }
 
 
         #endregion 方法
 
-        #region 事件
+        /// <summary>
+        /// 根据规则创建字符串
+        /// </summary>
+        /// <returns></returns>
+        public string getRandomString(int lenth)
+        {
+            if (lenth <= 0)
+            {
+                return "";
+            }
+            string name = string.Empty;
+            string a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string b = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+
+            name += a[ran.Next(a.Length)];
+            //随机文本
+            for (int i = 0; i < lenth - 1; i++)
+            {
+                name += b[ran.Next(b.Length)];
+            }
+            //合成
+            return name;
+        }
+
+        /// <summary>
+        /// 不卡界面的ｓｌｅeｐ
+        /// </summary>
+        /// <param name="time"></param>
+        public void Tsleep(int time)
+        {
+            Thread t = new Thread(o => Thread.Sleep(time));
+            t.Start();
+            while (t.IsAlive)
+            {
+                Thread.Sleep(1);
+                Application.DoEvents();
+            }
+        }
+
 
         public Form1()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// 规则生成用户名
+        /// </summary>
+        /// <returns></returns>
+        public string CreateName()
+        {
+            //生成帐号密码  
+            int nameLength = ran.Next((int)num_user_h.Value, (int)num_user_end.Value + 1);
+            string nameHead = checkBox_userheadch.Checked ? txt_user_head.Text.Trim() : "";
+            string nameEnd = checkBox_userendch.Checked ? txt_user_end.Text.Trim() : "";
+            string name = nameHead + getRandomString(nameLength - nameHead.Length - nameEnd.Length) + nameEnd;
+            return name;
+        }
 
+        /// <summary>
+        /// 规则生成密码
+        /// </summary>
+        /// <returns></returns>
+        public string CreatePwd()
+        {
+            bool pwdsame = rab_samePwd.Checked;
+            string spwd = txtBox_pwd_same.Text.Trim();
+            int pwdLength = ran.Next((int)num_pwd_head.Value, (int)num_pwd_end.Value + 1);
+            string pwdHead = checkBox_pwd_head.Checked ? txtBox_pwd_head.Text.Trim() : "";
+            string pwdEnd = checkBox_pwd_end.Checked ? txtBox_pwd_end.Text.Trim() : "";
+            string pwd = "";
+            if (pwdsame)
+            {
+                pwd = spwd;
+            }
+            else
+            {
+                pwd = pwdHead + getRandomString(pwdLength - pwdHead.Length - pwdEnd.Length) + pwdEnd;
+            }
+            return pwd;
+        }
+
+        /// <summary>
+        /// 添加帐号密码到列表
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pwd"></param>
+        public void adduserpwdtolist(string name ,string pwd)
+        {
+            if (!dic_UserPwd.ContainsKey(name ))
+            {
+                dic_UserPwd.Add(name ,pwd );
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = listView_UserPass.Items.Count.ToString();
+                lvi.SubItems.Add(name);
+                lvi.SubItems.Add(pwd);
+                listView_UserPass.Items.Add(lvi);
+            }  
+        }
+
+        /// <summary>
+        /// 按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Click(object sender, EventArgs e)
         {
+            ///判断是哪个按钮
             Button btn = (Button)sender;
             switch (btn.Tag.ToString())
             {
                 case "submitVCode":
-                    if(txt_Vcode .Text != "")
+                    if (txt_Vcode.Text != "")
                     {
-                        tmpCode = txt_Vcode.Text.Trim();                  
+                        tmpCode = txt_Vcode.Text.Trim();
                         waitforbtn = false;
                         txt_Vcode.Text = "";
                         picBox_Vcode.Image = null;
@@ -290,18 +306,78 @@ namespace RegTools
                     break;
                 case "Start":
                     readSet();
-                     Reg();
+                    Reg();
+                    break;
+                case "btn_Stop":
+                    //readSet();
+                    //Reg();
+                    break;
+                case "btn_autoCreateUsers":
+                    int num_toCreate = 0;
+                    int.TryParse(txtBox_CreateUserNum.Text.Trim(), out num_toCreate);
+                    if (num_toCreate > 100)
+                    {
+                        num_toCreate = 100;
+                        txtBox_CreateUserNum.Text = num_toCreate.ToString();
+                    }
+                    num_toCreate = num_toCreate <= 0 ? 1 : num_toCreate;
+                    while (num_toCreate-- > 0)
+                    {
+                        adduserpwdtolist(CreateName(), CreatePwd());
+                    }
+
+                    break;
+                case "btn_user_Clear":
+                    listView_UserPass.Items.Clear();
+                    break;
+                case "btn_AddGiven":
+                    string givenname = txtBox_GivenUser.Text.Trim();
+                    string givenpwd = txtBox_GivenPass.Text.Trim();
+                    givenname = string.IsNullOrEmpty(givenname) ? CreateName() : givenname;
+                    givenpwd = string.IsNullOrEmpty(givenpwd) ? CreatePwd () : givenpwd;
+                    adduserpwdtolist(givenname ,givenpwd );
                     break;
                 default:
                     break;
             }
         }
 
-        #region 配置改变触发事件
+        /// <summary>
+        /// 读入帐号数据
+        /// </summary>
+        /// <param name="file"></param>
+        private void importUsers(string file)
+        {
+            if (File.Exists(file))
+            {
+                string content = string.Empty;
+                using (StreamReader sr = new StreamReader(file))
+                {
+                    content = sr.ReadToEnd();//一次性读入内存
+                    sr.Dispose();
+                }
+                if (!string.IsNullOrEmpty(content))
+                {
+                    string user = "";
+                    string pass = "";
+                    Regex reg = new Regex("(.*?)----(.*?)(----(.*?))?\\r\\n");
+                    MatchCollection mc = reg.Matches(content);
+                    if (mc.Count > 0)
+                    {
+                        foreach (Match item in mc)
+                        {
+                            user = item.Groups[1].Value;
+                            pass = item.Groups[2].Value;
+                            adduserpwdtolist(user, pass);
+                        }
+                    }
 
-        #endregion 配置改变触发事件
+                }
 
-        #endregion 事件
+            }
+
+        }
+
 
         public void readSet()
         {
@@ -344,6 +420,11 @@ namespace RegTools
 
         }
 
+        /// <summary>
+        /// RadioButton checked 改变事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rab_CheckedChanged(object sender, EventArgs e)
         {
             return;
@@ -384,13 +465,26 @@ namespace RegTools
             }
         }
 
-
-
-        private void txt_Vcode_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// textbox　keydown事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode ==Keys.Enter)
+            if(e.KeyCode !=Keys.Enter)
             {
-                btn_Click(btn_submitVcode ,null );
+                return;
+            }
+
+            TextBox tbox = (TextBox)sender;
+            switch (tbox .Tag .ToString())
+            {
+                case "txt_Vcode":
+                    btn_Click(btn_submitVcode, null);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -407,9 +501,35 @@ namespace RegTools
             picBox_Vcode.Refresh();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 拖放进入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listView_DragDrop(object sender, DragEventArgs e)
         {
+            string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            int i;
+            for (i = 0; i < s.Length; i++)
+            {
+                if (s[i].Trim() != "")
+                {
+                    importUsers(s[i]);
+                }
+            }
+        }
 
+        /// <summary>
+        /// 拖放进入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
         }
     }
 }
