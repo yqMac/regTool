@@ -4,3 +4,8 @@
 RegTools/bin/Release/
 RegTools/obj/
 /Logs/
+.vs/
+/.vs/
+*.suo
+
+
