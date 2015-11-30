@@ -76,6 +76,66 @@ namespace RegTools
         {
             this.Proxy = proxyip;
         }
+
+        public bool Login163(string user,string pwd)
+        {
+            Cookies = "";
+            string url = "";
+            string postdata = "";
+            string reHtml = "";
+            try
+            {
+                //获取浏览器标识JESSION等基础信息
+                url = string.Format("http://reg.163.com/click.jsp?click_in=Login&v={0}&click_count_spec=userLoginQuery&_ahref=&_at=",new XJHTTP ().GetTimeByJs ());
+                items = new HttpItems() {
+                    URL =url,
+                    Cookie =Cookies,
+                    Referer=string.Format ("http://reg.163.com/UserLogin.do?errorType=460&errorUsername={0}@163.com",user )//"http://reg.163.com/UserLogin.do"
+                };
+                hr = helper.GetHtml(items ,ref Cookies );
+                reHtml = hr.Html;
+
+
+                //提交登录信息
+                url = string.Format("https://reg.163.com/logins.jsp");
+                postdata = string.Format("type=1&product=urs&url=&url2=http%3A%2F%2Freg.163.com%2FUserLogin.do&username={0}%40163.com&password={1}",user ,pwd );
+                items = new HttpItems()
+                {
+                    URL = url,
+                    Cookie = Cookies,
+                    Method ="post",
+                    Postdata =postdata,
+                     Referer = string.Format("http://reg.163.com/UserLogin.do?errorType=460&errorUsername={0}@163.com", user)
+                };
+                hr = helper.GetHtml(items, ref Cookies);
+                reHtml = hr.Html;
+
+                //登录后面内容
+                url = string.Format("http://reg.163.com/Main.jsp?username={0}",user );
+                items = new HttpItems()
+                {
+                    URL = url,
+                    Cookie = Cookies,
+                };
+                hr = helper.GetHtml(items, ref Cookies);
+                reHtml = hr.Html;
+
+                if (reHtml.Contains("上次登录")) {
+                    return true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                
+            }
+
+
+            return false;
+        }
+
+
+
         public bool RegUserPass(string user, string pass, ref string status)
         {
             try
@@ -436,6 +496,10 @@ namespace RegTools
                 string sid = "";
                 sid = GetStringMid(Cookies, "JSESSIONID=", ";");
                 string sd = GetStringMid(Cookies,"ser_adapter=",";");
+                if(string.IsNullOrEmpty(sd))
+                {
+                    sd = Cookies.Substring(Cookies .IndexOf ("ser_adapter=")+ "ser_adapter=".Length );
+                }
                 //prepare
                 url = String.Format("https://ssl.mail.163.com/regall/unireg/prepare.jsp?sid={0}&sd={1}", sid, sd);
                 items = new HttpItems()
@@ -446,6 +510,8 @@ namespace RegTools
                     //KeepAlive = true,
                     CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
                     //ProtocolVersion = System.Net.HttpVersion.Version10 
+                    //IsAjax = true 
+                    
                 };
                 //items.CerPath = System.Environment.CurrentDirectory + @"\163reg.cer";
                 hr = helper.GetHtml(items,ref Cookies);
@@ -473,6 +539,7 @@ namespace RegTools
                     //KeepAlive =true ,
                     Referer = "http://reg.email.163.com/unireg/call.do?cmd=register.entrance&from=163navi%C2%AEPage=163",
                     Allowautoredirect = false ,
+                    //IsAjax =true ,
                     CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
                     //ProtocolVersion = System.Net.HttpVersion.Version10
                 };
@@ -481,23 +548,23 @@ namespace RegTools
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
 
-                //Cookies = HttpHelpers.GetSmallCookie(Cookies );
-                 url = string.Format("http://entry.mail.163.com/coremail/fcg/ntesdoor2");
-                items = new HttpItems()
-                {
-                    URL = url,
-                    Cookie = Cookies,
-                    ProxyIp = Proxy
-                };
-                hr = helper.GetHtml(items,ref Cookies);
-                //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
-                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
-                //reHtml = reHtml.Trim();
-                if (reHtml == "无法连接到远程服务器")
-                {
-                    status += "无法连接到远程服务器";
-                    return false;
-                }
+                ////Cookies = HttpHelpers.GetSmallCookie(Cookies );
+                // url = string.Format("http://entry.mail.163.com/coremail/fcg/ntesdoor2");
+                //items = new HttpItems()
+                //{
+                //    URL = url,
+                //    Cookie = Cookies,
+                //    ProxyIp = Proxy
+                //};
+                //hr = helper.GetHtml(items,ref Cookies);
+                ////Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
+                // reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
+                ////reHtml = reHtml.Trim();
+                //if (reHtml == "无法连接到远程服务器")
+                //{
+                //    status += "无法连接到远程服务器";
+                //    return false;
+                //}
         
 
                 //{"code":401,"desc":"PARAMETER ERROR","msg":"VCODE_NOT_MATCH","result":863675}
