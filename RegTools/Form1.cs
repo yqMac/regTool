@@ -310,33 +310,15 @@ namespace RegTools
             userNameHead = txt_user_head.Text.Trim();
             userNameEnd = txt_user_end.Text.Trim();
 
-            userPassLH = (int)num_pass_h.Value;
-            userPassLE = (int)num_pass_end.Value;
-            userPassHead = txt_pass_head.Text.Trim();
-            userPassEnd = txt_pass_end.Text.Trim();
-            samePass = txt_pass_same.Text.Trim();
-
-            if (rab_User_o.Checked)
-            {
-                userNameType = 1;
-            }
-            else
-            {
-                userNameType = 2;
-            }
+           
+            userNameType = 2;
+            
             userNameHeadch = checkBox_userheadch.Checked;
             userNameEndch = checkBox_userendch.Checked;
 
-            if (rab_Pwd_same.Checked)
-            {
-                userPassType = 1;
-            }
-            else
-            {
+ 
                 userPassType = 2;
-            }
-            userPassHeadch = checkBox_pwdheadch.Checked;
-            userPassEndch = checkBox_pwdendch.Checked;
+  
 
             if (rab_Vcode_p.Checked)
             {
@@ -370,11 +352,7 @@ namespace RegTools
             userNameHead = txt_user_head.Text.Trim();
             userNameEnd = txt_user_end.Text.Trim();
 
-            userPassLH  = (int)num_pass_h .Value;
-            userPassLE = (int)num_pass_end .Value;
-            userPassHead = txt_pass_head .Text.Trim();
-            userPassEnd = txt_pass_end .Text.Trim();
-            samePass = txt_pass_same.Text.Trim();
+
 
 
 
@@ -382,23 +360,16 @@ namespace RegTools
             switch (rb.Tag.ToString ())
             {
                 case "User_Import":
-                    if(rab_User_o .Checked)
-                    {
-
-                    }else
-                    {
+    
                         userNameLH =(int ) num_user_h.Value;
                         userNameLE = (int)num_user_end.Value;
                         userNameHead = txt_user_head.Text.Trim();
                         userNameEnd = txt_user_end.Text.Trim();
 
-                    }
+                    
                     break;
                 case "Pass_Same":
-                     if(rab_Pwd_gze  .Checked)
-                    {
 
-                    }
                     break;
                 case "VCode_Flat":
 
@@ -434,6 +405,11 @@ namespace RegTools
                 picBox_Vcode.SizeMode = PictureBoxSizeMode.CenterImage;
             }
             picBox_Vcode.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
