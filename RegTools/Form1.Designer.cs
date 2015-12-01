@@ -36,6 +36,8 @@
             this.tp_tag = new System.Windows.Forms.TabPage();
             this.tp_ip = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtBox_pppoeName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -205,6 +207,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.txtBox_pppoeName);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
@@ -214,13 +218,30 @@
             this.panel1.Controls.Add(this.txtBox_pppoe_user);
             this.panel1.Location = new System.Drawing.Point(215, 156);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 67);
+            this.panel1.Size = new System.Drawing.Size(329, 89);
             this.panel1.TabIndex = 9;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(77, 12);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "免帐号名称：";
+            // 
+            // txtBox_pppoeName
+            // 
+            this.txtBox_pppoeName.Location = new System.Drawing.Point(71, 4);
+            this.txtBox_pppoeName.Name = "txtBox_pppoeName";
+            this.txtBox_pppoeName.Size = new System.Drawing.Size(100, 21);
+            this.txtBox_pppoeName.TabIndex = 7;
+            this.txtBox_pppoeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 35);
+            this.label13.Location = new System.Drawing.Point(206, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(47, 12);
             this.label13.TabIndex = 6;
@@ -229,7 +250,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(169, 7);
+            this.label6.Location = new System.Drawing.Point(162, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 5;
@@ -238,7 +259,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 6);
+            this.label5.Location = new System.Drawing.Point(6, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 4;
@@ -246,7 +267,7 @@
             // 
             // btn_pppoe_save
             // 
-            this.btn_pppoe_save.Location = new System.Drawing.Point(167, 28);
+            this.btn_pppoe_save.Location = new System.Drawing.Point(89, 58);
             this.btn_pppoe_save.Name = "btn_pppoe_save";
             this.btn_pppoe_save.Size = new System.Drawing.Size(147, 24);
             this.btn_pppoe_save.TabIndex = 3;
@@ -255,15 +276,16 @@
             // 
             // txtBox_pppoe_num
             // 
-            this.txtBox_pppoe_num.Location = new System.Drawing.Point(49, 30);
+            this.txtBox_pppoe_num.Location = new System.Drawing.Point(259, 4);
             this.txtBox_pppoe_num.Name = "txtBox_pppoe_num";
-            this.txtBox_pppoe_num.Size = new System.Drawing.Size(99, 21);
+            this.txtBox_pppoe_num.Size = new System.Drawing.Size(46, 21);
             this.txtBox_pppoe_num.TabIndex = 2;
+            this.txtBox_pppoe_num.Text = "2";
             this.txtBox_pppoe_num.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtBox_pppoe_pwd
             // 
-            this.txtBox_pppoe_pwd.Location = new System.Drawing.Point(213, 3);
+            this.txtBox_pppoe_pwd.Location = new System.Drawing.Point(206, 29);
             this.txtBox_pppoe_pwd.Name = "txtBox_pppoe_pwd";
             this.txtBox_pppoe_pwd.Size = new System.Drawing.Size(100, 21);
             this.txtBox_pppoe_pwd.TabIndex = 1;
@@ -271,7 +293,7 @@
             // 
             // txtBox_pppoe_user
             // 
-            this.txtBox_pppoe_user.Location = new System.Drawing.Point(49, 3);
+            this.txtBox_pppoe_user.Location = new System.Drawing.Point(53, 31);
             this.txtBox_pppoe_user.Name = "txtBox_pppoe_user";
             this.txtBox_pppoe_user.Size = new System.Drawing.Size(100, 21);
             this.txtBox_pppoe_user.TabIndex = 0;
@@ -984,7 +1006,7 @@
             this.num_user_end.Size = new System.Drawing.Size(40, 21);
             this.num_user_end.TabIndex = 2;
             this.num_user_end.Value = new decimal(new int[] {
-            8,
+            9,
             0,
             0,
             0});
@@ -996,7 +1018,7 @@
             this.num_user_h.Size = new System.Drawing.Size(42, 21);
             this.num_user_h.TabIndex = 1;
             this.num_user_h.Value = new decimal(new int[] {
-            6,
+            7,
             0,
             0,
             0});
@@ -1054,6 +1076,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "通用注册机";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tp_ip.ResumeLayout(false);
             this.tp_ip.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1180,6 +1203,8 @@
         private System.Windows.Forms.Button btn_user_Clear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtBox_pppoeName;
     }
 }
 

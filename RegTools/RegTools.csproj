@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotRas, Version=1.3.5813.18377, Culture=neutral, PublicKeyToken=c81a1ef59db87257, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DotRas.dll</HintPath>
+    </Reference>
     <Reference Include="HttpCodeLib">
       <HintPath>..\..\HttpCodeLib\HttpCodeLib\bin\Debug\HttpCodeLib.dll</HintPath>
     </Reference>

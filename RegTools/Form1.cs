@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DotRas;
+using HttpCodeLib;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -160,6 +163,34 @@ namespace RegTools
         }
 
 
+        private void waitforIp(string ip)
+        {
+            bool retry = true ;
+            do
+            {
+                HttpItems items = new HttpItems();
+                items.URL = @"http://www.ip138.com/ips1388.asp";
+                //items.ProxyIp = ip;
+                items.Cookie = " ";
+                //items.ProxyIp = "";
+                items.Timeout = 3000;
+                HttpResults hr = new HttpHelpers().GetHtml(items);
+                //string s = hr.StatusDescription;
+
+                string reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "").Replace(" ", "");
+                if (reHtml.Contains("您的IP地址是"))
+                {
+                    retry = false;
+                    reHtml = new XJHTTP().GetStringMid(reHtml, "您的IP地址是：[", "]");
+                    //reHtml = new XJHTTP().GetStringMid(reHtml, "[", "");
+                }
+                else
+                {
+                    Tsleep(10);
+                }
+            }
+            while (retry);
+        }
         public void Reg()
         {
             string status = string.Empty;
@@ -168,17 +199,44 @@ namespace RegTools
             email.getImgCode = GetImgCode;
             //bool s=email.Login163("yqmacyuqiang","aa13655312932bb");
             //email.setProxy("121.69.24.22:8118");//121.69.24.22:8118
-            string name = CreateName();
-            string pwd = CreatePwd();
-            if (!email .RegUserPass (name, name,ref status ))
+            int n = 20;
+            int regcount = 0;
+            int numforip = int.Parse(txtBox_pppoe_num.Text  );
+            while (n-->0)
             {
-                bool s = email.Login163(name , pwd );
-                MessageBox.Show((s?"登录成功":"登录失败")+"\n"+status );
-            }
-            else
-            {
-                bool s = email.Login163(name, pwd);
-                MessageBox.Show((s ? "登录成功" : "登录失败") + "\n" + status);
+                if (regcount >= numforip)
+                {
+                    string ip = changeIP();
+                    regcount = 0;
+                    waitforIp(ip);
+                    email = new Email163();
+                    email.getImgCode = GetImgCode;
+                }
+                string name = CreateName();
+                string pwd = CreatePwd();
+                if (!email.RegUserPass(name, pwd , ref status))
+                {
+                    bool s = email.Login163(name, pwd);
+                    MessageBox.Show((s ? "登录成功" : "登录失败") + "\n" + status);
+                    if(status .Contains("gray")||status .Contains ("SLOW_DOWN"))
+                    {
+                       string ip= changeIP();
+                        regcount = 0;
+                        waitforIp(ip );
+                        email = new Email163();
+                        email.getImgCode = GetImgCode;
+                    }
+                    else
+                    {
+                        string a = "";
+                    }
+                }
+                else
+                {
+                    bool s = email.Login163(name, pwd);
+                    MessageBox.Show((s ? "登录成功" : "登录失败") + "\n" + status);
+                    regcount++;
+                }
             }
         }
 
@@ -531,5 +589,121 @@ namespace RegTools
             else
                 e.Effect = DragDropEffects.None;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadConnections();
+            if(dic_pppoeName .Count > 0)
+            {
+                txtBox_pppoeName.Text = dic_pppoeName.First ().Key ;
+            }
+        }
+        #region 关于宽带ip的处理
+
+        private string  changeIP()
+        {
+            btnLogout();
+            Tsleep(1000);
+           return  getNewPPPoe();
+        }
+
+
+        Dictionary<string, System.Guid> dic_pppoeName = new Dictionary<string, System.Guid>();
+        /// <summary>
+        /// 显示活动的连接
+        /// </summary>
+        private string  LoadConnections()
+        {
+            foreach (RasConnection connection in RasConnection.GetActiveConnections())
+            {
+                if(dic_pppoeName .ContainsKey (connection .EntryName))
+                {
+                    dic_pppoeName[connection.EntryName] = connection.EntryId;
+                    
+                }else 
+                dic_pppoeName.Add(connection.EntryName, connection.EntryId);
+
+                RasIPInfo ipAddresses = (RasIPInfo)connection.GetProjectionInfo(RasProjectionType.IP);
+                if (ipAddresses != null)
+                {
+                    this.Text = ipAddresses.IPAddress.ToString();
+                    return ipAddresses.IPAddress.ToString();
+                    //sb.AppendFormat("ClientIP:{0}\r\n", ipAddresses.IPAddress.ToString());
+                    //sb.AppendFormat("ServerIP:{0}\r\n", ipAddresses.ServerIPAddress.ToString());
+                }
+                
+            }
+            return "";
+        }
+        /// <summary>
+        /// 获取IP地址信息
+        /// </summary>
+        private void getAddressbyPPPoEName(string name)
+        {
+            if(dic_pppoeName ==null ||!dic_pppoeName .ContainsKey (name))
+            {
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (RasConnection connection in RasConnection.GetActiveConnections())
+            {
+                if (connection.EntryId == dic_pppoeName [name])
+                {
+                    RasIPInfo ipAddresses = (RasIPInfo)connection.GetProjectionInfo(RasProjectionType.IP);
+                    if (ipAddresses != null)
+                    {
+                        sb.AppendFormat("ClientIP:{0}\r\n", ipAddresses.IPAddress.ToString());
+                        sb.AppendFormat("ServerIP:{0}\r\n", ipAddresses.ServerIPAddress.ToString());
+                    }
+                }
+                sb.AppendLine();
+            }
+            MessageBox.Show(sb.ToString());
+        }
+        /// <summary>
+        /// 测试拨号连接
+        /// </summary>
+        private string  getNewPPPoe(string name=null )
+        {
+            try
+            {
+                if(name ==null)
+                {
+                    name = txtBox_pppoeName.Text.Trim();
+                    name = string.IsNullOrEmpty(name) ? dic_pppoeName.First().Key : name;
+                }
+
+
+                RasDialer dialer = new RasDialer();
+                dialer.EntryName = name;
+                dialer.PhoneNumber = " ";
+                dialer.AllowUseStoredCredentials = true;
+                dialer.PhoneBookPath = RasPhoneBook.GetPhoneBookPath(RasPhoneBookType.AllUsers);
+                dialer.Timeout = 1000;
+                dialer.Dial();
+
+                Thread.Sleep(100);
+               return  LoadConnections();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return "";
+        }        /// <summary>
+                 /// 断开网络连接
+                 /// </summary>
+        private void btnLogout()
+        {
+            ReadOnlyCollection<RasConnection> conList = RasConnection.GetActiveConnections();
+            foreach (RasConnection con in conList)
+            {
+                con.HangUp();
+            }
+
+            //this.LoadConnections();
+        }
+
+        #endregion 关于宽带ip的处理
     }
 }

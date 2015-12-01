@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="e:\vs\install\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="F:\Desktop\DotRas v1.3 Source\Source\DotRas\DotRas\bin\Debug\DotRas.dll">
+   <Modules>
+    <Module Name="dotras.dll">
+     <Namespaces>
+      <Namespace Name="DotRas">
+       <Types>
+        <Type Name="InvalidHandleException" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule" Category="Microsoft.Security" CheckId="CA2135" Status="Active" Created="2015-12-01 02:12:41Z" FixCategory="NonBreaking">
+             <Issue Certainty="50" Level="CriticalWarning" Path="F:\Desktop\DotRas v1.3 Source\Source\DotRas\DotRas" File="InvalidHandleException.cs" Line="127">使用 'SecurityPermissionAttribute' 的 LinkDemand 保护 'InvalidHandleException.GetObjectData(SerializationInfo, StreamingContext)'。在级别 2 安全规则集中，应改为使其成为安全关键的来提供保护。移除此 LinkDemand 并将 'InvalidHandleException.GetObjectData(SerializationInfo, StreamingContext)' 标记为安全关键的。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="RasDialException" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule" Category="Microsoft.Security" CheckId="CA2135" Status="Active" Created="2015-12-01 02:12:41Z" FixCategory="NonBreaking">
+             <Issue Certainty="50" Level="CriticalWarning" Path="F:\Desktop\DotRas v1.3 Source\Source\DotRas\DotRas" File="RasDialException.cs" Line="106">使用 'SecurityPermissionAttribute' 的 LinkDemand 保护 'RasDialException.GetObjectData(SerializationInfo, StreamingContext)'。在级别 2 安全规则集中，应改为使其成为安全关键的来提供保护。移除此 LinkDemand 并将 'RasDialException.GetObjectData(SerializationInfo, StreamingContext)' 标记为安全关键的。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="RasException" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule" Category="Microsoft.Security" CheckId="CA2135" Status="Active" Created="2015-12-01 02:12:41Z" FixCategory="NonBreaking">
+             <Issue Certainty="50" Level="CriticalWarning" Path="F:\Desktop\DotRas v1.3 Source\Source\DotRas\DotRas" File="RasException.cs" Line="106">使用 'SecurityPermissionAttribute' 的 LinkDemand 保护 'RasException.GetObjectData(SerializationInfo, StreamingContext)'。在级别 2 安全规则集中，应改为使其成为安全关键的来提供保护。移除此 LinkDemand 并将 'RasException.GetObjectData(SerializationInfo, StreamingContext)' 标记为安全关键的。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="DotRas.Internal">
+       <Types>
+        <Type Name="IPAddressConverter" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Status="Active" Created="2015-12-01 02:12:41Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Warning" Path="F:\Desktop\DotRas v1.3 Source\Source\DotRas\DotRas\Internal" File="IPAddressConverter.cs" Line="101">在方法 'IPAddressConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)' 中多次将参数 'value' 强制转换为类型 'string'。请缓存“as”运算符或直接强制转换的结果以消除冗余的 castclass 指令。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+   <Name>避免进行不必要的强制转换</Name>
+   <Description>由于进行强制转换会产生相关的开销，因此请尽可能避免重复强制转换。</Description>
+   <Resolution Name="Parameter">在方法 {2} 中多次将参数 {0} 强制转换为类型 {1}。请缓存“as”运算符或直接强制转换的结果以消除冗余的 {3} 指令。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182271.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule" Category="Microsoft.Security" CheckId="CA2135">
+   <Name>级别 2 程序集不应包含 LinkDemand</Name>
+   <Description>级别 2 安全规则集中已弃用 LinkDemand。应改为使用 SecurityCritical 方法、类型和字段，来替代使用 LinkDemand 强制实施 JIT 时间安全性。</Description>
+   <Resolution Name="Default">使用 {1} 的 LinkDemand 保护 {0}。在级别 2 安全规则集中，应改为使其成为安全关键的来提供保护。移除此 LinkDemand 并将 {0} 标记为安全关键的。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/dd997569(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="50">CriticalWarning</MessageLevel>
+   <File Name="securitytransparencyrules.dll" Version="4.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">类别</String>
+  <String Key="Certainty">确定性</String>
+  <String Key="CollapseAll">全部折叠</String>
+  <String Key="CheckId">检查 ID</String>
+  <String Key="Error">错误</String>
+  <String Key="Errors">错误</String>
+  <String Key="ExpandAll">全部展开</String>
+  <String Key="Help">帮助</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">消息</String>
+  <String Key="LocationNotStoredInPdb">[位置未存储在 Pdb 中]</String>
+  <String Key="Project">项目</String>
+  <String Key="Resolution">解析</String>
+  <String Key="Rule">规则</String>
+  <String Key="RuleFile">规则文件</String>
+  <String Key="RuleDescription">规则说明</String>
+  <String Key="Source">源</String>
+  <String Key="Status">状态</String>
+  <String Key="Target">目标</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">代码分析报告</String>
+ </Localized>
+</FxCopReport>

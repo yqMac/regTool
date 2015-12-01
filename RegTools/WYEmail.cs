@@ -52,7 +52,9 @@ namespace RegTools
                     URL = url,
                     Cookie = Cookies,
                     Method = "post",
-                    Postdata =postdata 
+                    Postdata = postdata,
+                    IsAjax = true 
+                    
                 };
                 //items.Container = cc;
                 // items.ProxyIp = proxy ;
@@ -435,7 +437,7 @@ namespace RegTools
                 byte[] codebytes = null;
                 Cookies = "";
                 status = string.Empty;
-
+                string cookieForPost = "";
                 Cookies = "";
                 //获取初始　JSESSIONID,SID两个唯一标识，返回的Cookie里面
                 string url = string.Format("http://reg.email.163.com/unireg/call.do?cmd=register.entrance&from=163navi%C2%AEPage=163");
@@ -446,23 +448,70 @@ namespace RegTools
                     ProxyIp = Proxy
                 };
                 hr = helper.GetHtml(items,ref Cookies);
-                //Cookies += HttpHelpers.GetSmallCookie(hr.Cookie);
                 string reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
-                //reHtml = reHtml.Trim();
-                if (reHtml == "无法连接到远程服务器")
+                if(!reHtml .Contains("注册网易免费邮箱"))
                 {
-                    status += "无法连接到远程服务器";
+                    status += "获取初始 失败";
                     return false;
                 }
                 string envalue = get_env(reHtml);
+               
 
 
+
+                url = "http://reg.email.163.com/unireg/call.do?cmd=register.formLog";
+                postData = string.Format("opt=write_field&flow=main&field=name&result=done&uid={0}%40163.com&timecost={1}&level=info", user , new Random().Next(4000, 10000).ToString());
+                items = new HttpItems()
+                {
+                    URL = url,
+                    Cookie = Cookies,
+                    Method = "post",
+                    Postdata =postData ,
+                    Referer = "http://reg.email.163.com/unireg/call.do?cmd=register.entrance&from=163navi%C2%AEPage=163",
+                    // IsAjax = true,
+                    ProxyIp = Proxy 
+                };
+                hr = helper.GetHtml(items, ref Cookies);
+                reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
+                reHtml = reHtml.Trim();
+                if (!reHtml.Contains("200"))
+                {
+                    status += "formlog验证，非200";
+                    return false;
+                }
 
                 if (!CheckUserName(user))
                 {
                     status = "检查用户名可注册性返回失败";
                     return false;
                 }
+
+
+
+                string sid = "";
+                sid = GetStringMid(Cookies, "JSESSIONID=", ";");
+                string sd = GetStringMid(Cookies, "ser_adapter=", ";");
+                if (string.IsNullOrEmpty(sd))
+                {
+                    sd = Cookies.Substring(Cookies.IndexOf("ser_adapter=") + "ser_adapter=".Length);
+                }
+                //JSESSIONID=BAF169A63DC82B728981F6A35749F9A0;mailsync=06d9d949febba7cbad54129b7bc6c4671f685c44529e575c78fae60cb5cf36c103fc6b87d5685515a8dc42bce97830b5;ser_adapter=INTERNAL134
+                //prepare
+                cookieForPost = "";
+                url = String.Format("https://ssl.mail.163.com/regall/unireg/prepare.jsp?sid={0}&sd={1}", sid, sd);
+                items = new HttpItems()
+                {
+                    URL = url,
+                    Cookie = cookieForPost,
+                    ProxyIp = Proxy,
+                    //KeepAlive = true,
+                    CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
+                    //ProtocolVersion = System.Net.HttpVersion.Version10 
+                    //IsAjax = true 
+
+                };
+                //items.CerPath = System.Environment.CurrentDirectory + @"\163reg.cer";
+                hr = helper.GetHtml(items, ref cookieForPost);
                 GETVCODE:
 
 
@@ -493,30 +542,12 @@ namespace RegTools
 
                 forlog(Cookies ,user ,pass );
 
-                string sid = "";
-                sid = GetStringMid(Cookies, "JSESSIONID=", ";");
-                string sd = GetStringMid(Cookies,"ser_adapter=",";");
-                if(string.IsNullOrEmpty(sd))
-                {
-                    sd = Cookies.Substring(Cookies .IndexOf ("ser_adapter=")+ "ser_adapter=".Length );
-                }
-                //prepare
-                url = String.Format("https://ssl.mail.163.com/regall/unireg/prepare.jsp?sid={0}&sd={1}", sid, sd);
-                items = new HttpItems()
-                {
-                    URL = url,
-                    Cookie = Cookies,
-                    ProxyIp = Proxy,
-                    //KeepAlive = true,
-                    CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
-                    //ProtocolVersion = System.Net.HttpVersion.Version10 
-                    //IsAjax = true 
-                    
-                };
-                //items.CerPath = System.Environment.CurrentDirectory + @"\163reg.cer";
-                hr = helper.GetHtml(items,ref Cookies);
+               
+                //JSESSIONID=BAF169A63DC82B728981F6A35749F9A0;mailsync=562d05ee8ccf61a2b72091d6f755dc026cce72127aef931f1a82e260197506399c1fe6c90e59d1dfa8dc42bce97830b5;ser_adapter=INTERNAL134
+                
+                //JSESSIONID=BAF169A63DC82B728981F6A35749F9A0;mailsync=562d05ee8ccf61a2b72091d6f755dc026cce72127aef931f1a82e260197506399c1fe6c90e59d1dfa8dc42bce97830b5;ser_adapter=INTERNAL134
                 //Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
-                reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
+                //reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                // Cookies =Cookies.Replace(";;",";");
 
 
@@ -531,7 +562,7 @@ namespace RegTools
                 items = new HttpItems()
                 {
                     URL = url,
-                    Cookie = Cookies,
+                    Cookie = cookieForPost,
                     ProxyIp = Proxy,
                     Method = "POST",
                     //PostDataType = CsharpHttpHelpers.Enum.PostDataType.String,
@@ -543,7 +574,7 @@ namespace RegTools
                     CerPath = System.Environment.CurrentDirectory + @"\163reg.cer",
                     //ProtocolVersion = System.Net.HttpVersion.Version10
                 };
-                hr = helper.GetHtml(items,ref Cookies);
+                hr = helper.GetHtml(items,ref cookieForPost);
                // Cookies +=  HttpHelpers.GetSmallCookie(hr.Cookie);
                 reHtml = hr.Html.Replace("\r\n", "").Replace("\t", "").Replace("\n", "");
                 reHtml = reHtml.Trim();
@@ -568,10 +599,11 @@ namespace RegTools
         
 
                 //{"code":401,"desc":"PARAMETER ERROR","msg":"VCODE_NOT_MATCH","result":863675}
-                if (reHtml.Contains("注册成功") || reHtml.Contains("http://mail.163.com/dashi/activity/reg/ok.do?from=zimu"))
+                if (cookieForPost.Contains ("NTES_SESS") ||reHtml.Contains("注册成功") || reHtml.Contains("http://mail.163.com/dashi/activity/reg/ok.do?from=zimu"))
                 {
                     File.AppendAllText(Environment.CurrentDirectory + @"\finishUsers.txt", string.Format("{0}----{1}\r\n", user, pass));
                     status += "注册成功\t";
+                    Cookies = cookieForPost;
                     return true;
                     //MessageBox.Show("注册成功");
                 }
